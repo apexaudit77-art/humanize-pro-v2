@@ -1,0 +1,408 @@
+import { AuthGuard } from "@/components/auth-guard";
+import { Sidebar } from "@/components/ui/sidebar";
+import { Metadata } from "next";
+
+type Props = {
+  params: { lang: string };
+};
+
+const pageConfig = {
+  en: {
+    title: "Humanize AI Text Free | Bypass AI Detector & AI to Human Converter",
+    description: "Use the best AI to human converter to humanize AI text free and bypass AI detectors like Turnitin & GPTZero. This free bypass AI detection tool makes AI content undetectable.",
+    nav: {
+        humanizer: "AI Humanizer",
+        articleForge: "Article Forge",
+        articleFormatter: "Article Formatter",
+        documentAnalyzer: "Document Analyzer",
+        aiDetector: "AI Detector",
+        plagiarismChecker: "Plagiarism Checker",
+        grammarChecker: "Grammar Checker",
+        seoSuite: "SEO Suite",
+        citationGenerator: "Citation Generator",
+        aiTranslator: "AI Translator",
+        socialMediaExpert: "Social Media Expert",
+    },
+    humanizerTab: {
+        placeholder: "Place your AI-generated text here, and we will work our magic to make it completely human-like.",
+        button: "Humanize Text",
+        loading: "Humanizing...",
+        outputTitle: "Humanized Output",
+        outputPlaceholder: "Your humanized text will appear here.",
+        yourText: "Your Text",
+    },
+    articleForgeTab: {
+        title: "AI Article Forge",
+        description: "Create complete, SEO-optimized articles from a single topic.",
+        settingsTitle: "Article Settings",
+        settingsDescription: "Configure the AI to generate your perfect article.",
+        topicLabel: "Article Topic",
+        topicPlaceholder: "e.g., The Future of Renewable Energy",
+        categoryLabel: "Category",
+        categoryPlaceholder: "Select a category",
+        styleLabel: "Writing Style",
+        stylePlaceholder: "Select a style",
+        languageLabel: "Language",
+        languagePlaceholder: "Select a language",
+        useCaseLabel: "Use Case",
+        button: "Generate Content",
+        loading: "Generating...",
+        outputTitle: "Generated Content",
+        outputDescription: "Your AI-crafted article will appear below.",
+        outputPlaceholder: "Your generated content will appear here.",
+    },
+    aiDetectorTab: {
+        title: "AI Content Detector",
+        description: "Analyze text for AI-generated patterns.",
+        placeholder: "Paste your article here... (minimum 100 words)",
+        wordCount: "Word Count",
+        button: "Start Deep Scan",
+        loading: "Running Deep Scan...",
+        resultsPlaceholder: "Results will appear here.",
+        analyzing: "Analyzing...",
+        humanScore: "Human",
+        advice: {
+            good: "Great! This content is likely to be seen as human-written.",
+            medium: "Your text has a mix of human and AI-like patterns. Consider revising for more authenticity.",
+            bad: "This content has a high probability of being detected as AI. We recommend using our Humanizer Tool to improve it."
+        },
+        enginesTitle: "Simulated Detection Engines"
+    },
+    plagiarismCheckerTab: {
+        title: "Plagiarism Checker",
+        description: "Check content for originality. Feature coming soon!",
+        placeholder: "Paste your text here (up to 2000 words)...",
+        wordCount: "Word Count",
+        resultsPlaceholder: "Analysis results will appear here.",
+        button: "Analyze Content (Coming Soon)",
+        uploadButton: "Upload File (Coming Soon)",
+    },
+    seoToolsTab: {
+        mainTitle: "Advanced SEO Suite",
+        mainDescription: "Elevate your content strategy with our integrated SEO tools.",
+        metaGeneratorTitle: "Meta-Tag Generator",
+        metaGeneratorDescription: "Create SEO-friendly titles and descriptions.",
+        metaGeneratorContentLabel: "Your Content",
+        metaGeneratorContentPlaceholder: "Paste your content here to generate meta tags...",
+        metaGeneratorButton: "Generate Meta Tags",
+        metaGeneratorResultTitle: "Meta Title",
+        metaGeneratorResultDescription: "Meta Description",
+        headerGeneratorTitle: "Semantic Header Tags",
+        headerGeneratorDescription: "Structure your content with proper H1, H2, H3 tags.",
+        headerGeneratorContentLabel: "Your Content",
+        headerGeneratorContentPlaceholder: "Paste your content here to add semantic headers...",
+        headerGeneratorButton: "Generate Headers",
+        headerGeneratorResultLabel: "Output with Headers",
+        lsiIntegratorTitle: "LSI Keyword Integrator",
+        lsiIntegratorDescription: "Naturally weave in related keywords.",
+        lsiIntegratorContentLabel: "Your Content",
+        lsiIntegratorContentPlaceholder: "Paste your content here...",
+        lsiIntegratorKeywordsLabel: "Keywords to Integrate",
+        lsiIntegratorKeywordsPlaceholder: "e.g., digital marketing, seo strategy, content creation",
+        lsiIntegratorButton: "Integrate Keywords",
+        lsiIntegratorResultLabel: "Integrated Content",
+    },
+    seoContent: {
+      title: "Unleash the Power of Human Content with Humanize AI Pro",
+      description: "In a world teeming with AI-generated content, distinction is the key to success. Whether you are a student striving to submit authentic research or a content writer aiming to top search engine rankings, Humanize AI Pro is your perfect tool. We offer you the best techniques for converting AI text to human text, ensuring your content is 100% natural and undetectable.",
+      feature1Title: "Bypass AI Detectors with Confidence",
+      feature1Description: "Our tool is specifically designed to bypass the most powerful detection systems like Turnitin and GPTZero. Rephrase texts professionally to ensure complete authenticity.",
+      feature2Title: "Professional Rephrasing",
+      feature2Description: "Transform routine texts into engaging and compelling content that preserves the original meaning but sounds like it was written by a human expert.",
+      feature3Title: "The Best Tool to Increase Quality",
+      feature3Description: "Don't just avoid detection; elevate the quality of your content to be more impactful and engaging with your audience.",
+    },
+    mainContent: {
+        welcomeTitle: "Humanize AI text free عربي & Bypass AI detector",
+        verificationSuiteTitle: "Verification Suite",
+        verificationSuiteDescription: "Ensure your content is original and passes AI detection.",
+        seoSuiteTitle: "Advanced SEO Suite",
+        seoSuiteDescription: "Elevate your content's ranking and visibility.",
+    }
+  },
+  ar: {
+    title: "أنسنة نص الذكاء الاصطناعي مجانًا | تجاوز كاشف AI وأداة تحويل AI إلى نص بشري",
+    description: "استخدم أفضل أداة لتحويل نص الذكاء الاصطناعي إلى نص بشري (humanize ai text free عربي) وتجاوز كواشف الذكاء الاصطناعي مثل Turnitin و GPTZero. أداة تجاوز كشف الذكاء الاصطناعي المجانية هذه تجعل محتوى الذكاء الاصطناعي غير قابل للكشف.",
+    nav: {
+        humanizer: "المحول البشري",
+        articleForge: "منشئ المقالات",
+        articleFormatter: "منسق المقالات",
+        documentAnalyzer: "محلل المستندات",
+        aiDetector: "كاشف الذكاء الاصطناعي",
+        plagiarismChecker: "فاحص السرقة",
+        grammarChecker: "المدقق اللغوي",
+        seoSuite: "أدوات SEO",
+        citationGenerator: "مولد الاستشهادات",
+        aiTranslator: "مترجم AI",
+        socialMediaExpert: "خبير السوشيال ميديا",
+    },
+    humanizerTab: {
+        placeholder: "ضع نص الذكاء الاصطناعي هنا، وسنتولى نحن سحره ليصبح بشرياً بالكامل.",
+        button: "أنسنة النص",
+        loading: "جاري الأنسنة...",
+        outputTitle: "النص المُحسَّن",
+        outputPlaceholder: "سيظهر النص المُحسَّن هنا.",
+        yourText: "النص الأصلي",
+    },
+    articleForgeTab: {
+        title: "صانع المقالات بالذكاء الاصطناعي",
+        description: "أنشئ مقالات كاملة ومحسّنة لمحركات البحث من موضوع واحد فقط.",
+        settingsTitle: "إعدادات المقال",
+        settingsDescription: "قم بضبط إعدادات الذكاء الاصطناعي لتوليد مقالك المثالي.",
+        topicLabel: "موضوع المقال",
+        topicPlaceholder: "مثال: مستقبل الطاقة المتجددة",
+        categoryLabel: "الفئة",
+        categoryPlaceholder: "اختر فئة",
+        styleLabel: "أسلوب الكتابة",
+        stylePlaceholder: "اختر أسلوبًا",
+        languageLabel: "اللغة",
+        languagePlaceholder: "اختر لغة",
+        useCaseLabel: "حالة الاستخدام",
+        button: "إنشاء المحتوى",
+        loading: "جاري الإنشاء...",
+        outputTitle: "المحتوى المُولَّد",
+        outputDescription: "سيظهر مقالك الذي صاغه الذكاء الاصطناعي أدناه.",
+        outputPlaceholder: "سيظهر المحتوى الذي تم إنشاؤه هنا.",
+    },
+    aiDetectorTab: {
+        title: "كاشف محتوى الذكاء الاصطناعي",
+        description: "حلل النص للكشف عن الأنماط التي أنشأها الذكاء الاصطناعي.",
+        placeholder: "الصق مقالك هنا... (100 كلمة على الأقل)",
+        wordCount: "عدد الكلمات",
+        button: "بدء الفحص العميق",
+        loading: "جاري الفحص العميق...",
+        resultsPlaceholder: "ستظهر النتائج هنا.",
+        analyzing: "جاري التحليل...",
+        humanScore: "بشري",
+        advice: {
+            good: "رائع! من المرجح أن يُنظر إلى هذا المحتوى على أنه مكتوب بواسطة إنسان.",
+            medium: "يحتوي نصك على مزيج من الأنماط البشرية والشبيهة بالذكاء الاصطناعي. فكر في المراجعة لمزيد من الأصالة.",
+            bad: "هذا المحتوى لديه احتمال كبير بأن يتم اكتشافه كذكاء اصطناعي. نوصي باستخدام أداة الأنسنة لتحسينه."
+        },
+        enginesTitle: "محركات كشف محاكاة"
+    },
+    plagiarismCheckerTab: {
+        title: "فاحص السرقة الأدبية",
+        description: "تحقق من أصالة المحتوى. الميزة قادمة قريبًا!",
+        placeholder: "الصق النص هنا (حتى 2000 كلمة)...",
+        wordCount: "عدد الكلمات",
+        resultsPlaceholder: "ستظهر نتائج التحليل هنا.",
+        button: "تحليل المحتوى (قريباً)",
+        uploadButton: "رفع ملف (قريباً)",
+    },
+    seoToolsTab: {
+        mainTitle: "مجموعة أدوات تحسين محركات البحث المتقدمة",
+        mainDescription: "ارتقِ باستراتيجية المحتوى الخاصة بك مع أدواتنا المتكاملة لتحسين محركات البحث.",
+        metaGeneratorTitle: "مولد العلامات الوصفية",
+        metaGeneratorDescription: "أنشئ عناوين وأوصافًا صديقة لمحركات البحث.",
+        metaGeneratorContentLabel: "المحتوى الخاص بك",
+        metaGeneratorContentPlaceholder: "الصق المحتوى الخاص بك هنا لإنشاء علامات وصفية...",
+        metaGeneratorButton: "إنشاء علامات وصفية",
+        metaGeneratorResultTitle: "العنوان الوصفي",
+        metaGeneratorResultDescription: "الوصف التعريفي",
+        headerGeneratorTitle: "مولد عناوين сми",
+        headerGeneratorDescription: "نظم المحتوى الخاص بك بعناوين H1, H2, H3 مناسبة.",
+        headerGeneratorContentLabel: "المحتوى الخاص بك",
+        headerGeneratorContentPlaceholder: "الصق المحتوى الخاص بك هنا لإضافة عناوين دلالية...",
+        headerGeneratorButton: "إنشاء العناوين",
+        headerGeneratorResultLabel: "الناتج مع العناوين",
+        lsiIntegratorTitle: "دمج الكلمات المفتاحية المرادفة",
+        lsiIntegratorDescription: "ادمج الكلمات الرئيسية ذات الصلة بشكل طبيعي.",
+        lsiIntegratorContentLabel: "المحتوى الخاص بك",
+        lsiIntegratorContentPlaceholder: "الصق المحتوى الخاص بك هنا...",
+        lsiIntegratorKeywordsLabel: "الكلمات المفتاحية للدمج",
+        lsiIntegratorKeywordsPlaceholder: "مثال: تسويق رقمي, استراتيجية SEO, إنشاء محتوى",
+        lsiIntegratorButton: "دمج الكلمات المفتاحية",
+        lsiIntegratorResultLabel: "المحتوى المدمج",
+    },
+    seoContent: {
+      title: "أطلق العنان لقوة المحتوى البشري مع Humanize AI Pro",
+      description: "في عالم يعج بالمحتوى الذي تم إنشاؤه بواسطة الذكاء الاصطناعي، أصبح التميز هو مفتاح النجاح. سواء كنت طالبًا يسعى لتقديم أبحاث أصيلة، أو كاتب محتوى يهدف إلى تصدر محركات البحث، فإن Humanize AI Pro هي أداتك المثالية. نحن نقدم لك أفضل تقنيات تحويل نص الذكاء الاصطناعي إلى نص بشري، مما يضمن لك محتوى طبيعي 100% وغير قابل للكشف.",
+      feature1Title: "تخطي كاشف AI بثقة",
+      feature1Description: "أداتنا مصممة خصيصًا لتجاوز أقوى أنظمة الكشف مثل Turnitin و GPTZero. قم بإعادة صياغة النصوص باحترافية لتضمن الأصالة الكاملة.",
+      feature2Title: "إعادة صياغة احترافية",
+      feature2Description: "حوّل النصوص الروتينية إلى محتوى جذاب ومقنع يحافظ على المعنى الأصلي ولكنه يبدو وكأنه كتبه خبير بشري.",
+      feature3Title: "أفضل أداة لزيادة الجودة",
+      feature3Description: "لا تكتفِ فقط بتجنب الكشف، بل ارفع من جودة المحتوى الخاص بك ليكون أكثر تأثيرًا وتفاعلًا مع جمهورك.",
+    },
+    mainContent: {
+        welcomeTitle: "Humanize AI text free عربي و Bypass AI detector",
+        verificationSuiteTitle: "جناح التحقق",
+        verificationSuiteDescription: "تأكد من أن المحتوى الخاص بك أصلي ويتجاوز كشف الذكاء الاصطناعي.",
+        seoSuiteTitle: "مجموعة أدوات تحسين محركات البحث المتقدمة",
+        seoSuiteDescription: "ارتقِ بترتيب المحتوى الخاص بك ورؤيته.",
+    }
+  },
+  es: {
+    title: "Humanizar Texto IA Gratis | Evitar Detector de IA y Conversor de IA a Humano",
+    description: "Usa el mejor conversor de IA a humano para humanizar texto de IA gratis y eludir detectores de IA como Turnitin y GPTZero. Esta herramienta gratuita para evitar la detección de IA hace que el contenido de IA sea indetectable.",
+    nav: {
+        humanizer: "Humanizador de IA",
+        articleForge: "Forja de Artículos",
+        articleFormatter: "Formatador de Artículos",
+        documentAnalyzer: "Analizador de Documentos",
+        aiDetector: "Detector de IA",
+        plagiarismChecker: "Verificador de Plagio",
+        grammarChecker: "Corrector Gramatical",
+        seoSuite: "Suite de SEO",
+        citationGenerator: "Generador de Citas",
+        aiTranslator: "Traductor de IA",
+        socialMediaExpert: "Experto en Redes Sociales",
+    },
+    humanizerTab: {
+        placeholder: "Pega tu texto de IA aquí y nosotros haremos nuestra magia para que parezca completamente humano.",
+        button: "Humanizar Texto",
+        loading: "Humanizando...",
+        outputTitle: "Resultado Humanizado",
+        outputPlaceholder: "Tu texto humanizado aparecerá aquí.",
+        yourText: "Tu Texto",
+    },
+    articleForgeTab: {
+        title: "Forja de Artículos con IA",
+        description: "Crea artículos completos y optimizados para SEO a partir de un solo tema.",
+        settingsTitle: "Configuración del Artículo",
+        settingsDescription: "Configura la IA para generar tu artículo perfecto.",
+        topicLabel: "Tema del Artículo",
+        topicPlaceholder: "Ej: El Futuro de la Energía Renovable",
+        categoryLabel: "Categoría",
+        categoryPlaceholder: "Selecciona una categoría",
+        styleLabel: "Estilo de Escritura",
+        stylePlaceholder: "Selecciona un estilo",
+        languageLabel: "Idioma",
+        languagePlaceholder: "Selecciona un idioma",
+        useCaseLabel: "Caso de Uso",
+        button: "Generar Contenido",
+        loading: "Generando...",
+        outputTitle: "Contenido Generado",
+        outputDescription: "Tu artículo creado por IA aparecerá a continuación.",
+        outputPlaceholder: "Tu contenido generado aparecerá aquí.",
+    },
+    aiDetectorTab: {
+        title: "Detector de Contenido de IA",
+        description: "Analiza texto en busca de patrones generados por IA.",
+        placeholder: "Pega tu artículo aquí... (mínimo 100 palabras)",
+        wordCount: "Recuento de Palabras",
+        button: "Iniciar Escaneo Profundo",
+        loading: "Realizando Escaneo Profundo...",
+        resultsPlaceholder: "Los resultados aparecerán aquí.",
+        analyzing: "Analizando...",
+        humanScore: "Humano",
+        advice: {
+            good: "¡Genial! Es probable que este contenido se vea como escrito por un humano.",
+            medium: "Tu texto tiene una mezcla de patrones humanos y similares a los de la IA. Considera revisarlo para mayor autenticidad.",
+            bad: "Este contenido tiene una alta probabilidad de ser detectado como IA. Recomendamos usar nuestra Herramienta Humanizadora para mejorarlo."
+        },
+        enginesTitle: "Motores de Detección Simulados"
+    },
+    plagiarismCheckerTab: {
+        title: "Verificador de Plagio",
+        description: "Verifique la originalidad del contenido. ¡Función próximamente!",
+        placeholder: "Pegue su texto aquí (hasta 2000 palabras)...",
+        wordCount: "Recuento de palabras",
+        resultsPlaceholder: "Los resultados del análisis aparecerán aquí.",
+        button: "Analizar Contenido (Próximamente)",
+        uploadButton: "Subir Archivo (Próximamente)",
+    },
+    seoToolsTab: {
+        mainTitle: "Suite SEO Avanzada",
+        mainDescription: "Eleve su estrategia de contenido con nuestras herramientas SEO integradas.",
+        metaGeneratorTitle: "Generador de Meta-Tags",
+        metaGeneratorDescription: "Cree títulos y descripciones amigables para SEO.",
+        metaGeneratorContentLabel: "Tu Contenido",
+        metaGeneratorContentPlaceholder: "Pega tu contenido aquí para generar meta tags...",
+        metaGeneratorButton: "Generar Meta Tags",
+        metaGeneratorResultTitle: "Meta Título",
+        metaGeneratorResultDescription: "Meta Descripción",
+        headerGeneratorTitle: "Generador de Etiquetas de Encabezado Semántico",
+        headerGeneratorDescription: "Estructure su contenido con las etiquetas H1, H2, H3 adecuadas.",
+        headerGeneratorContentLabel: "Tu Contenido",
+        headerGeneratorContentPlaceholder: "Pega tu contenido aquí para añadir encabezados semánticos...",
+        headerGeneratorButton: "Generar Encabezados",
+        headerGeneratorResultLabel: "Salida con Encabezados",
+        lsiIntegratorTitle: "Integrador de Palabras Clave LSI",
+        lsiIntegratorDescription: "Teje naturalmente palabras clave relacionadas.",
+        lsiIntegratorContentLabel: "Tu Contenido",
+        lsiIntegratorContentPlaceholder: "Pega tu contenido aquí...",
+        lsiIntegratorKeywordsLabel: "Palabras Clave a Integrar",
+        lsiIntegratorKeywordsPlaceholder: "Ej: marketing digital, estrategia seo, creación de contenido",
+        lsiIntegratorButton: "Integrar Palabras Clave",
+        lsiIntegratorResultLabel: "Contenido Integrado",
+    },
+    seoContent: {
+      title: "Libera el Poder del Contenido Humano con Humanize AI Pro",
+      description: "En un mundo repleto de contenido generado por IA, la distinción es la clave del éxito. Ya seas un estudiante que se esfuerza por presentar una investigación auténtica o un redactor de contenido que busca encabezar los rankings de los motores de búsqueda, Humanize AI Pro es tu herramienta perfecta. Te ofrecemos las mejores técnicas para convertir texto de IA en texto humano, asegurando que tu contenido sea 100% natural e indetectable.",
+      feature1Title: "Evita los Detectores de IA con Confianza",
+      feature1Description: "Nuestra herramienta está diseñada específicamente para eludir los sistemas de detección más potentes como Turnitin y GPTZero. Reformula textos profesionalmente para garantizar una autenticidad completa.",
+      feature2Title: "Reformulación Profesional",
+      feature2Description: "Transforma textos rutinarios en contenido atractivo y convincente que conserva el significado original pero suena como si hubiera sido escrito por un experto humano.",
+      feature3Title: "La Mejor Herramienta para Aumentar la Calidad",
+      feature3Description: "No te limites a evitar la detección; eleva la calidad de tu contenido para que sea más impactante y atractivo para tu audiencia.",
+    },
+    mainContent: {
+        welcomeTitle: "Humanizar texto IA gratis & Evitar detector de IA",
+        verificationSuiteTitle: "Suite de Verificación",
+        verificationSuiteDescription: "Asegúrese de que su contenido sea original y pase la detección de IA.",
+        seoSuiteTitle: "Suite SEO Avanzada",
+        seoSuiteDescription: "Eleve el ranking y la visibilidad de su contenido.",
+    }
+  },
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
+  
+  const keywords = [
+    "humanize ai text", "bypass ai detector", "ai to human converter", "undetectable ai",
+    "ai humanizer", "bypass turnitin", "gptzero", "zerogpt", "ai writer", "stealth writer",
+    "humanize ai text free", "humanize ai text free عربي", "humanize a ai text free online",
+    "humanize ai text arabic", "humanize ai text عربي", "humanize ai text free online unlimited",
+    "humanize ai text tool", "humanize ai text free arabic", "humanize ai text org",
+    "bypass ai detector", "bypass ai detector free", "bypass ai detection tool free",
+    "bypass ai detectors and humanize text", "bypass ai detector humanize",
+    "bypass ai detector and humanize text free", "bypass ai detection prompt",
+    "bypass ai detection chatgpt", "bypass ai detector chatgpt", "Bypass Al detection",
+    "HIX Bypass", "AI to human converter", "ai to human converter.com", "ai to human converter free",
+    "ai to human converter text", "ai to human converter free online", "ai to human converter tool",
+    "ai to human converter pdf", "ai to human converter text free",
+    "ai to human converter without changing text", "ai to human converter best",
+    "SEO keyword generator", "seo keyword generator free", "seo keyword generator ai",
+    "seo keyword generator for youtube", "seo keyword generator for instagram",
+    "seo keyword generator tools", "seo keyword generator google", "seo keyword generator from url",
+    "ai seo keyword generator free", "etsy seo keyword generator", "is AI text detectable",
+    "Is Al text detectable", "is ai text detectable reddit", "is al generated text detectable",
+    "is humanize ai text detectable", "how to bypass zero chatgpt",
+    "how to bypass zero thickness geometry in solidworks", "how to bypass zerohedge paywall",
+    "how to bypass zero trust", "how to bypass chat gpt zero",
+    "how to bypass region flipper zero", "how to bypass chatgpt zero reddit",
+    "how to bypass chat zero", "dogs into humans ai",
+    "grubby ai humanizer", "quillbot's ai humanizer", "best free ai humanizer", "scribbr",
+    "ai humanizer free", "ai writer", "stealth", "turnitin ai detector",
+    "how to bypass turnitin", "is gptzero accurate"
+  ];
+
+  if (lang === 'ar') {
+    keywords.push(...["أنسنة النص", "تجاوز كاشف الذكاء الاصطناعي", "تحويل النص الى بشري", "تحويل AI إلى نص بشري"]);
+  }
+
+  return {
+    title: config.title,
+    description: config.description,
+    keywords: keywords,
+  };
+}
+
+export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
+
+  return (
+    <AuthGuard>
+      <Sidebar
+        lang={lang}
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        config={config}
+      />
+    </AuthGuard>
+  );
+}

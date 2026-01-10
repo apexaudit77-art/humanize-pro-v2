@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the HumanizeAI Pro application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "Date and time the user registered.",
+          "format": "date-time"
+        },
+        "lastLogin": {
+          "type": "string",
+          "description": "Date and time of the user's last login.",
+          "format": "date-time"
+        },
+        "googleId": {
+          "type": "string",
+          "description": "User's Google ID (if registered via Google).",
+          "format": "string"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "registrationDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "google.com"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles.  Access is restricted to the user themselves. User's id parameter.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure is designed to support the HumanizeAI Pro application, focusing on user management and access control. The structure leverages path-based ownership for user data and ensures authorization independence by avoiding hierarchical `get()` calls in security rules. It uses structural segregation to ensure that all documents within a collection share similar security requirements.\n\n*   `/users/{userId}`: This collection stores user profiles. Access is restricted to the user themselves. This path enforces clear ownership and simplifies security rules.\n\nThis design facilitates secure `list` operations by segregating data based on ownership and purpose.  Rules are simplified by clearly defining ownership at the path level (e.g., `/users/{userId}`). No custom claims or complex role hierarchies are used.  The application can easily enforce access controls based solely on `request.auth.uid` and the Firestore path.\n\nAuthorization Independence: Achieved by relying solely on the `request.auth.uid` and path-based ownership, eliminating the need for `get()` calls to parent documents for authorization. All necessary authorization context is derived directly from the request and the document's location.\n\nQAPs Support: Supported through structural segregation and path-based ownership. Listing user data is secured by restricting access to each user's own collection (`/users/{userId}`), ensuring users can only access their own data."
+  }
+}
