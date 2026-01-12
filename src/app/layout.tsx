@@ -44,6 +44,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-K3RHZ8XC');`,
           }}
         />
+        <script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+                basicSubscriptions.init({
+                  type: "NewsArticle",
+                  isPartOfType: ["Product"],
+                  isPartOfProductId: "CAow2IHFDA:openaccess",
+                  clientOptions: { theme: "light", lang: "en" },
+                });
+              });
+            `,
+          }}
+        />
       </head>
       <body
         className={cn(
