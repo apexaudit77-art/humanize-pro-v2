@@ -33,7 +33,7 @@ export default async function Blog() {
                  <div className="md:col-span-1">
                     <Link href={`/blog/${post.slug}`}>
                         <Image 
-                            src={`https://picsum.photos/seed/${index + 1}/600/400`}
+                            src={`https://picsum.photos/seed/${post.slug}/600/400`}
                             alt={post.title}
                             width={600}
                             height={400}
