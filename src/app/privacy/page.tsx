@@ -29,7 +29,7 @@ export default function PrivacyPage() {
                 <div className="prose prose-lg dark:prose-invert max-w-none">
                     <h2>Our Commitment to Privacy</h2>
                     <p>
-                       This policy explains how we handle your information when you use our <strong>AI to human converter</strong>. We do not store or sell your data. Your privacy is our priority as you <strong>humanize AI text</strong> and <strong>bypass AI detectors</strong>.
+                       This policy explains how we handle your information when you use our <strong>AI to human converter</strong>. We do not store or sell your data. Your privacy is our priority as you <strong>humanize AI text</strong> and <strong>bypass AI detectors</strong>. Our commitment to <strong>data protection</strong> means we do not retain any text submitted for <strong>AI text processing</strong>.
                     </p>
                     
                     <hr className="my-8" />

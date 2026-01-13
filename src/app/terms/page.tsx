@@ -29,7 +29,7 @@ export default function TermsOfService() {
                 <div className="prose prose-lg dark:prose-invert max-w-none">
                     <h2>1. Acceptance of Terms</h2>
                     <p>
-                        By using HumanizeAI Pro, you agree to these terms. Our service provides a powerful <strong>AI to human converter</strong> designed to help you <strong>humanize AI text</strong>. These terms govern your use of our tools to <strong>bypass AI detectors</strong>. You agree not to use the service for any illegal or unauthorized purpose.
+                        By using HumanizeAI Pro, you agree to this <strong>User Agreement</strong>. Our service provides a powerful <strong>AI to human converter</strong> designed to help you <strong>humanize AI text</strong>. These terms govern your use of our tools to <strong>bypass AI detectors</strong>, including our policies on <strong>AI text processing</strong>. You agree not to use the service for any illegal or unauthorized purpose.
                     </p>
                     <h2>2. Use of Service</h2>
                     <p>
