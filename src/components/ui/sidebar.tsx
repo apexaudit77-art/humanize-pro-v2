@@ -58,11 +58,11 @@ const Footer = () => (
     <footer className="w-full py-8 text-center text-sm text-muted-foreground border-t border-border/10">
         <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
             <p>&copy; {new Date().getFullYear()} HumanizeAI Pro. All rights reserved.</p>
-            <div className="flex gap-4 md:gap-6">
+            <div className="flex gap-4 md:gap-6 flex-wrap justify-center">
                 <Link href="/about" className="hover:text-primary transition-colors">About</Link>
                 <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
                 <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
-                <Link href="/terms-of-service" className="hover:text-primary transition-colors">Terms</Link>
+                <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
                  <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
                  <Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link>
                  <Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link>
