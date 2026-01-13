@@ -27,21 +27,35 @@ export default async function Blog() {
               Tips, tricks, and updates on AI content and SEO.
             </p>
           </div>
-          <div className="grid gap-8">
-            {posts.map((post) => (
-              <article key={post.slug} className="group relative">
-                <div className="mb-2">
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(post.date).toLocaleDateString()}
-                  </p>
-                </div>
-                <h3 className="text-2xl font-bold font-headline mb-2">
-                   <Link href={`/blog/${post.slug}`}>
-                    <span className="absolute inset-0" />
-                    {post.title}
-                  </Link>
-                </h3>
-                <p className="text-muted-foreground">{post.excerpt}</p>
+          <div className="grid gap-12">
+            {posts.map((post, index) => (
+              <article key={post.slug} className="group relative grid md:grid-cols-3 gap-6 items-center">
+                 <div className="md:col-span-1">
+                    <Link href={`/blog/${post.slug}`}>
+                        <Image 
+                            src={`https://picsum.photos/seed/${index + 1}/600/400`}
+                            alt={post.title}
+                            width={600}
+                            height={400}
+                            className="rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint="artificial intelligence abstract"
+                        />
+                    </Link>
+                 </div>
+                 <div className="md:col-span-2">
+                    <div className="mb-2">
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(post.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <h3 className="text-2xl font-bold font-headline mb-2">
+                       <Link href={`/blog/${post.slug}`}>
+                        <span className="absolute inset-0" />
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p className="text-muted-foreground">{post.excerpt}</p>
+                 </div>
               </article>
             ))}
           </div>
