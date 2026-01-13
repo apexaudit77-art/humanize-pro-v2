@@ -48,6 +48,7 @@ import {
 import Image from 'next/image';
 import { SeoContent } from '../seo-content';
 import { AuthGuard } from '../auth-guard';
+import { NewsletterForm } from '../newsletter-form';
 
 interface SidebarProps {
   lang: string;
@@ -439,6 +440,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             <FeatureCards />
             <Separator className="my-12 bg-border/10" />
             <SeoContent config={config.seoContent} />
+            <NewsletterForm />
             <Footer />
           </main>
         </div>

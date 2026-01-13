@@ -36,6 +36,28 @@
         "email",
         "registrationDate"
       ]
+    },
+    "NewsletterSubscriber": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Newsletter Subscriber",
+      "type": "object",
+      "description": "Represents a user who has subscribed to the newsletter.",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address of the subscriber.",
+          "format": "email"
+        },
+        "subscribedAt": {
+          "type": "string",
+          "description": "Date and time the user subscribed.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "email",
+        "subscribedAt"
+      ]
     }
   },
   "auth": {
@@ -61,8 +83,24 @@
             }
           ]
         }
+      },
+      {
+        "path": "/newsletter_subscribers/{subscriberId}",
+        "definition": {
+          "entityName": "NewsletterSubscriber",
+          "schema": {
+            "$ref": "#/backend/entities/NewsletterSubscriber"
+          },
+          "description": "Stores email addresses of newsletter subscribers. Publicly writable for new subscriptions.",
+          "params": [
+            {
+              "name": "subscriberId",
+              "description": "The unique identifier for the subscriber."
+            }
+          ]
+        }
       }
     ],
-    "reasoning": "This Firestore structure is designed to support the HumanizeAI Pro application, focusing on user management and access control. The structure leverages path-based ownership for user data and ensures authorization independence by avoiding hierarchical `get()` calls in security rules. It uses structural segregation to ensure that all documents within a collection share similar security requirements.\n\n*   `/users/{userId}`: This collection stores user profiles. Access is restricted to the user themselves. This path enforces clear ownership and simplifies security rules.\n\nThis design facilitates secure `list` operations by segregating data based on ownership and purpose.  Rules are simplified by clearly defining ownership at the path level (e.g., `/users/{userId}`). No custom claims or complex role hierarchies are used.  The application can easily enforce access controls based solely on `request.auth.uid` and the Firestore path.\n\nAuthorization Independence: Achieved by relying solely on the `request.auth.uid` and path-based ownership, eliminating the need for `get()` calls to parent documents for authorization. All necessary authorization context is derived directly from the request and the document's location.\n\nQAPs Support: Supported through structural segregation and path-based ownership. Listing user data is secured by restricting access to each user's own collection (`/users/{userId}`), ensuring users can only access their own data."
+    "reasoning": "This Firestore structure is designed to support the HumanizeAI Pro application, focusing on user management and access control. The structure leverages path-based ownership for user data and ensures authorization independence by avoiding hierarchical `get()` calls in security rules. It uses structural segregation to ensure that all documents within a collection share similar security requirements.\n\n*   `/users/{userId}`: This collection stores user profiles. Access is restricted to the user themselves. This path enforces clear ownership and simplifies security rules.\n*   `/newsletter_subscribers/{subscriberId}`: This collection stores newsletter subscriptions. It allows public creation so that any visitor can subscribe, but restricts read, update, and delete access to prevent data exposure.\n\nThis design facilitates secure `list` operations by segregating data based on ownership and purpose.  Rules are simplified by clearly defining ownership at the path level (e.g., `/users/{userId}`). No custom claims or complex role hierarchies are used.  The application can easily enforce access controls based solely on `request.auth.uid` and the Firestore path.\n\nAuthorization Independence: Achieved by relying solely on the `request.auth.uid` and path-based ownership, eliminating the need for `get()` calls to parent documents for authorization. All necessary authorization context is derived directly from the request and the document's location.\n\nQAPs Support: Supported through structural segregation and path-based ownership. Listing user data is secured by restricting access to each user's own collection (`/users/{userId}`), ensuring users can only access their own data."
   }
 }

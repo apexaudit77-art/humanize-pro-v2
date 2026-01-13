@@ -8,6 +8,8 @@ import { generateSeoArticle, type GenerateSeoArticleInput } from '@/ai/flows/gen
 import { generateSemanticHeaderTags } from '@/ai/flows/generate-semantic-header-tags';
 import { integrateLsiKeywords } from '@/ai/flows/integrate-lsi-keywords';
 import { removeAiPatterns } from '@/ai/flows/remove-ai-patterns';
+import { initializeFirebase } from '@/firebase';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 interface ActionResult {
   success: boolean;
@@ -111,6 +113,45 @@ export async function detectText(text: string): Promise<ActionResult> {
     return { success: true, data: result };
   } catch (e) {
     console.error("detectText Error:", e);
+    return { success: false, error: getErrorMessage(e) };
+  }
+}
+
+export async function subscribeToNewsletter(email: string): Promise<ActionResult> {
+  if (!email) {
+    return { success: false, error: 'Email is required.' };
+  }
+  
+  // Basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { success: false, error: 'Please enter a valid email address.' };
+  }
+  
+  try {
+    // This is a server action, so we can re-initialize firebase here
+    const { firestore } = initializeFirebase({
+        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    });
+
+    if (!firestore) {
+      throw new Error('Firestore is not initialized.');
+    }
+
+    const subscribersCollection = collection(firestore, 'newsletter_subscribers');
+    await addDoc(subscribersCollection, {
+      email: email,
+      subscribedAt: serverTimestamp(),
+    });
+
+    return { success: true };
+  } catch (e) {
+    console.error("subscribeToNewsletter Error:", e);
     return { success: false, error: getErrorMessage(e) };
   }
 }

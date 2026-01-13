@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getPosts } from "@/lib/posts";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 export default async function Blog() {
   const posts = await getPosts();
@@ -43,6 +44,9 @@ export default async function Blog() {
                 <p className="text-muted-foreground">{post.excerpt}</p>
               </article>
             ))}
+          </div>
+           <div className="mt-16">
+            <NewsletterForm />
           </div>
         </main>
       </div>
