@@ -40,7 +40,7 @@ export async function GET() {
     <link>${baseUrl}/blog</link>
     <description>Tips, tricks, and updates on AI content and SEO from Humanize AI Pro.</description>
     <language>en-us</language>
-    <lastBuildDate>${new Date(posts[0].date).toUTCString()}</lastBuildDate>
+    <lastBuildDate>${posts.length > 0 ? new Date(posts[0].date).toUTCString() : new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
     ${rssItems}
   </channel>
