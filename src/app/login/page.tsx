@@ -68,7 +68,6 @@ export default function LoginPage() {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast({ title: 'Login successful!' });
-      // The useEffect will handle the redirect
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -87,7 +86,6 @@ export default function LoginPage() {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
         toast({ title: 'Signed in with Google successfully!' });
-        // The useEffect will handle the redirect
     } catch (error: any) {
         toast({
             variant: 'destructive',
@@ -174,7 +172,7 @@ export default function LoginPage() {
             </Button>
           </CardContent>
           <CardFooter className="justify-center text-sm">
-            <p>Don't have an account?&nbsp;</p>
+            <p>Don\'t have an account?&nbsp;</p>
             <Link href="/signup" className="font-semibold text-primary hover:underline">
               Sign up
             </Link>
