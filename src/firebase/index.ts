@@ -12,8 +12,9 @@ export function initializeFirebase(config: FirebaseConfig) {
     return getSdks(getApp());
   }
 
+  // The config is now passed directly from the provider, so we can rely on it being present.
   if (!config?.apiKey) {
-     console.error("Firebase config is not available.");
+     console.error("Firebase config is missing API Key. Initialization failed.");
     // Return a mock structure to prevent crashing the app
     return { firebaseApp: null, auth: null, firestore: null };
   }
