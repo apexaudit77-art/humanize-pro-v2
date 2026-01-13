@@ -1,10 +1,6 @@
 
-import { Sidebar } from "@/components/ui/sidebar";
 import { Metadata } from "next";
-
-type Props = {
-  params: { lang: string };
-};
+import SidebarClient from '@/components/ui/sidebar-client';
 
 const pageConfig = {
   en: {
@@ -397,7 +393,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
   const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
 
   return (
-    <Sidebar
+    <SidebarClient
       lang={lang}
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       config={config}
