@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,40 +19,50 @@ export default function PrivacyPolicy() {
         <main className="flex w-full flex-grow flex-col items-center py-8 md:py-12">
             <div className="w-full max-w-3xl space-y-8">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
                         Privacy Policy
-                    </h2>
+                    </h1>
                     <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
                         Last updated: {new Date().toLocaleDateString()}
                     </p>
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none">
+                    <h2>Our Commitment to Your Privacy</h2>
                     <p>
-                        Welcome to HumanizeAI Pro. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+                        Welcome to HumanizeAI Pro. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service to <strong>humanize AI text</strong> and <strong>bypass AI detectors</strong>. Your trust is essential to us, and we are committed to being transparent about our data practices.
                     </p>
-                    <h3>Information We Collect</h3>
+                    
+                    <h2>Information We Collect</h2>
                     <p>
-                        We may collect personal information from you such as your name, email address, and payment information when you register for our services or make a purchase. We also collect non-personal information, such as browser type, operating system, and website usage data.
+                        When you use our <strong>AI to human converter</strong>, we may collect personal information such as your name and email address when you register. We do not store the text you process. All submitted text is processed in memory and immediately discarded after the humanization process is complete.
                     </p>
-                    <h3>How We Use Your Information</h3>
+                    
+                    <h2>How We Use Your Information</h2>
                     <p>
-                        We use the information we collect to provide, maintain, and improve our services, to process transactions, to send you technical notices, updates, security alerts, and support and administrative messages, and to communicate with you about products, services, offers, promotions, and events.
+                        The information we collect is used solely to provide and improve our services, process your requests, and communicate with you about our tools. We are constantly working to enhance our ability to <strong>bypass AI detection</strong> and provide you with the best results.
                     </p>
-                     <h3>Third-Party Advertisers</h3>
-                    <p>
-                        We may use third-party advertising companies to serve ads when you visit the website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you. If you would like more information about this practice and to know your choices about not having this information used by these companies, see the Network Advertising Initiative's consumer website.
-                    </p>
-                    <p>
-                        Specifically, Google, as a third-party vendor, uses cookies to serve ads on our site. Google's use of the DART cookie enables it to serve ads to our users based on their visit to our sites and other sites on the Internet. Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy.
-                    </p>
-                    <h3>Sharing Your Information</h3>
-                    <p>
-                        We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information unless we provide users with advance notice. This does not include website hosting partners and other parties who assist us in operating our website, conducting our business, or serving our users, so long as those parties agree to keep this information confidential.
-                    </p>
-                    <h3>Security of Your Information</h3>
-                    <p>
-                        We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
-                    </p>
+
+                    <hr className="my-8" />
+                    
+                    <div dir="rtl" className="text-right">
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                            سياسة الخصوصية
+                        </h1>
+                        <h2>التزامنا بخصوصيتك</h2>
+                        <p>
+                            مرحبًا بك في HumanizeAI Pro. نحن ملتزمون بحماية خصوصيتك. تشرح سياسة الخصوصية هذه كيف نجمع ونستخدم ونكشف عن معلوماتك عند استخدام خدمتنا <strong>لأنسنة نص الذكاء الاصطناعي</strong> و<strong>تجاوز كواشف الذكاء الاصطناعي</strong>. ثقتك ضرورية لنا، ونحن ملتزمون بالشفافية بشأن ممارسات البيانات لدينا.
+                        </p>
+                        
+                        <h2>المعلومات التي نجمعها</h2>
+                        <p>
+                            عندما تستخدم <strong>محول AI إلى نص بشري</strong> الخاص بنا، قد نجمع معلومات شخصية مثل اسمك وعنوان بريدك الإلكتروني عند التسجيل. نحن لا نخزن النص الذي تقوم بمعالجته. تتم معالجة جميع النصوص المقدمة في الذاكرة ويتم التخلص منها فورًا بعد اكتمال عملية الأنسنة.
+                        </p>
+                        
+                        <h2>كيف نستخدم معلوماتك</h2>
+                        <p>
+                             المعلومات التي نجمعها تستخدم فقط لتوفير وتحسين خدماتنا، ومعالجة طلباتك، والتواصل معك بشأن أدواتنا. نعمل باستمرار على تعزيز قدرتنا على <strong>تجاوز كشف الذكاء الاصطناعي</strong> وتقديم أفضل النتائج لك.
+                        </p>
+                    </div>
                 </div>
             </div>
         </main>

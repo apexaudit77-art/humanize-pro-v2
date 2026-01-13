@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,23 +19,43 @@ export default function ContactUs() {
         <main className="flex w-full flex-grow flex-col items-center py-8 md:py-12">
             <div className="w-full max-w-3xl space-y-8 text-center">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
                         Contact Us
-                    </h2>
+                    </h1>
                      <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
-                        We'd love to hear from you.
+                        Have questions about our AI to human converter? We'd love to hear from you.
                     </p>
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none mx-auto">
                     <p>
-                        If you have any questions, feedback, or inquiries, please feel free to reach out to us. Our team is here to help.
+                        If you have any questions, feedback, or inquiries about how to <strong>humanize AI text</strong> or <strong>bypass AI detectors</strong>, please feel free to reach out to us. Our team is here to help you get the most out of our <strong>AI to human converter</strong>.
                     </p>
                     <p>
                         You can email us at: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
                     </p>
                      <p>
-                        We strive to respond to all inquiries within 24-48 hours.
+                        We strive to respond to all inquiries within 24-48 hours. Your success is our priority.
                     </p>
+
+                    <hr className="my-8" />
+                    
+                    <div dir="rtl" className="text-right">
+                         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                            اتصل بنا
+                        </h1>
+                        <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
+                            هل لديك أسئلة حول محول AI إلى نص بشري؟ نود أن نسمع منك.
+                        </p>
+                         <p>
+                            إذا كان لديك أي أسئلة أو ملاحظات أو استفسارات حول كيفية <strong>أنسنة نص الذكاء الاصطناعي</strong> أو <strong>تجاوز كواشف الذكاء الاصطناعي</strong>، فلا تتردد في التواصل معنا. فريقنا هنا لمساعدتك في تحقيق أقصى استفادة من <strong>محول AI إلى نص بشري</strong>.
+                        </p>
+                        <p>
+                           يمكنك مراسلتنا عبر البريد الإلكتروني: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
+                        </p>
+                        <p>
+                            نسعى جاهدين للرد على جميع الاستفسارات في غضون 24-48 ساعة. نجاحك هو أولويتنا.
+                        </p>
+                    </div>
                 </div>
             </div>
         </main>
