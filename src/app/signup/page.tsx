@@ -73,7 +73,7 @@ export default function SignupPage() {
         await updateProfile(userCredential.user, { displayName: values.name });
       }
       toast({ title: 'Account created successfully!' });
-      router.push('/en/humanize-ai');
+      // The useEffect will handle the redirect
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -92,7 +92,7 @@ export default function SignupPage() {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast({ title: 'Signed up with Google successfully!' });
-      router.push('/en/humanize-ai');
+      // The useEffect will handle the redirect
     } catch (error: any) {
       toast({
         variant: 'destructive',

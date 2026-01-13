@@ -68,7 +68,7 @@ export default function LoginPage() {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast({ title: 'Login successful!' });
-      router.push('/en/humanize-ai');
+      // The useEffect will handle the redirect
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -87,7 +87,7 @@ export default function LoginPage() {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
         toast({ title: 'Signed in with Google successfully!' });
-        router.push('/en/humanize-ai');
+        // The useEffect will handle the redirect
     } catch (error: any) {
         toast({
             variant: 'destructive',
