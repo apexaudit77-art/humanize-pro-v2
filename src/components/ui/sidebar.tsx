@@ -67,6 +67,7 @@ const Footer = () => (
                  <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
                  <Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link>
                  <Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link>
+                 <Link href="/sitemap.xml" className="hover:text-primary transition-colors">Sitemap</Link>
             </div>
         </div>
     </footer>
