@@ -1,4 +1,4 @@
-import { AuthGuard } from "@/components/auth-guard";
+
 import { Sidebar } from "@/components/ui/sidebar";
 import { Metadata } from "next";
 
@@ -397,12 +397,10 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
   const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
 
   return (
-    <AuthGuard>
-      <Sidebar
-        lang={lang}
-        dir={lang === 'ar' ? 'rtl' : 'ltr'}
-        config={config}
-      />
-    </AuthGuard>
+    <Sidebar
+      lang={lang}
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      config={config}
+    />
   );
 }
