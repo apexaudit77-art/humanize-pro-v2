@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function ContactUs() {
+export default function ContactPage() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-transparent text-foreground">
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -28,13 +28,10 @@ export default function ContactUs() {
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none mx-auto">
                     <p>
-                        If you have any questions, feedback, or inquiries about how to <strong>humanize AI text</strong> or <strong>bypass AI detectors</strong>, please feel free to reach out to us. Our team is here to help you get the most out of our <strong>AI to human converter</strong>.
+                        For any questions, feedback, or inquiries about how to <strong>humanize AI text</strong> or <strong>bypass AI detectors</strong>, please feel free to reach out. Our team is here to help you get the most out of our <strong>AI to human converter</strong>.
                     </p>
                     <p>
-                        You can email us at: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
-                    </p>
-                     <p>
-                        We strive to respond to all inquiries within 24-48 hours. Your success is our priority.
+                        Email us at: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
                     </p>
 
                     <hr className="my-8" />
@@ -43,17 +40,11 @@ export default function ContactUs() {
                          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
                             اتصل بنا
                         </h1>
-                        <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
-                            هل لديك أسئلة حول محول AI إلى نص بشري؟ نود أن نسمع منك.
-                        </p>
-                         <p>
-                            إذا كان لديك أي أسئلة أو ملاحظات أو استفسارات حول كيفية <strong>أنسنة نص الذكاء الاصطناعي</strong> أو <strong>تجاوز كواشف الذكاء الاصطناعي</strong>، فلا تتردد في التواصل معنا. فريقنا هنا لمساعدتك في تحقيق أقصى استفادة من <strong>محول AI إلى نص بشري</strong>.
+                        <p>
+                           لديك أي أسئلة أو ملاحظات حول كيفية <strong>أنسنة نص الذكاء الاصطناعي</strong> أو <strong>تجاوز كواشف الذكاء الاصطناعي</strong>، لا تتردد في التواصل معنا.
                         </p>
                         <p>
-                           يمكنك مراسلتنا عبر البريد الإلكتروني: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
-                        </p>
-                        <p>
-                            نسعى جاهدين للرد على جميع الاستفسارات في غضون 24-48 ساعة. نجاحك هو أولويتنا.
+                           راسلنا عبر البريد الإلكتروني: <a href="mailto:support@humanizeaipro.com" className="text-primary hover:underline">support@humanizeaipro.com</a>
                         </p>
                     </div>
                 </div>

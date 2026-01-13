@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function TermsOfService() {
+export default function AboutPage() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-transparent text-foreground">
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -20,31 +20,31 @@ export default function TermsOfService() {
             <div className="w-full max-w-3xl space-y-8">
                 <div className="text-center">
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                        Terms of Service
+                        About HumanizeAI Pro
                     </h1>
                      <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
-                        Last updated: {new Date().toLocaleDateString()}
+                        Your trusted partner to humanize AI text and bypass AI detectors.
                     </p>
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none">
-                    <h2>1. Acceptance of Terms</h2>
+                    
+                    <h2>Our Mission</h2>
                     <p>
-                        By using HumanizeAI Pro, you agree to these terms. Our service provides a powerful <strong>AI to human converter</strong> designed to help you <strong>humanize AI text</strong>. These terms govern your use of our tools to <strong>bypass AI detectors</strong>. You agree not to use the service for any illegal or unauthorized purpose.
-                    </p>
-                    <h2>2. Use of Service</h2>
-                    <p>
-                        Our service is intended to assist writers in creating high-quality, authentic content. You are responsible for the final content you produce. While our tool is designed to <strong>bypass AI detection</strong>, we do not guarantee that all content will be 100% undetectable in all current or future scenarios.
+                        At HumanizeAI Pro, our mission is to empower content creators, students, and professionals by providing a cutting-edge <strong>AI to human text converter</strong>. We aim to bridge the gap between AI-generated content and authentic human expression, helping you <strong>bypass AI detectors</strong> like Turnitin and GPTZero with confidence. Our goal is to make your content undetectable and genuinely engaging.
                     </p>
 
                     <hr className="my-8" />
-                    
+
                     <div dir="rtl" className="text-right">
                         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                            شروط الخدمة
+                            عن HumanizeAI Pro
                         </h1>
-                        <h2>1. قبول الشروط</h2>
+                        <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
+                           شريكك الموثوق لتحويل نص الذكاء الاصطناعي إلى نص بشري وتجاوز كواشف الذكاء الاصطناعي.
+                        </p>
+                        <h2>مهمتنا</h2>
                         <p>
-                            باستخدامك لـ HumanizeAI Pro، فإنك توافق على هذه الشروط. توفر خدمتنا <strong>محول AI إلى نص بشري</strong> قوي لمساعدتك على <strong>أنسنة نص الذكاء الاصطناعي</strong>. تحكم هذه الشروط استخدامك لأدواتنا <strong>لتجاوز كواشف الذكاء الاصطناعي</strong>.
+                            في HumanizeAI Pro، تتمثل مهمتنا في تمكين منشئي المحتوى والطلاب والمحترفين من خلال توفير <strong>محول نص AI إلى نص بشري</strong> متطور. نهدف إلى سد الفجوة بين المحتوى الذي تم إنشاؤه بواسطة الذكاء الاصطناعي والتعبير البشري الأصيل، مما يساعدك على <strong>تجاوز كواشف الذكاء الاصطناعي</strong> مثل Turnitin و GPTZero بثقة. هدفنا هو جعل المحتوى الخاص بك غير قابل للكشف وجذابًا حقًا.
                         </p>
                     </div>
                 </div>

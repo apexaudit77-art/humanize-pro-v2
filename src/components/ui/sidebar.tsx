@@ -59,12 +59,13 @@ const Footer = () => (
         <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
             <p>&copy; {new Date().getFullYear()} HumanizeAI Pro. All rights reserved.</p>
             <div className="flex gap-4 md:gap-6">
-                <Link href="/about-us" className="hover:text-primary transition-colors">About</Link>
-                <Link href="/contact-us" className="hover:text-primary transition-colors">Contact</Link>
-                <Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy</Link>
+                <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+                <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+                <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
                 <Link href="/terms-of-service" className="hover:text-primary transition-colors">Terms</Link>
                  <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
                  <Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link>
+                 <Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link>
             </div>
         </div>
     </footer>
