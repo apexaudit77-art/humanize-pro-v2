@@ -1,4 +1,3 @@
-
 import { getPosts } from '@/lib/posts';
 import { NextResponse } from 'next/server';
 
