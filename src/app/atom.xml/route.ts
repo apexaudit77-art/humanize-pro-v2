@@ -19,6 +19,7 @@ export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://humanize-ai.ooguy.com';
   const feedUrl = `${baseUrl}/atom.xml`;
   const blogUrl = `${baseUrl}/blog`;
+  const lastUpdated = new Date().toISOString();
 
   const atomItems = posts
     .map(post => {
@@ -28,7 +29,7 @@ export async function GET() {
           <title>${escapeXml(post.title)}</title>
           <link href="${postUrl}" />
           <id>${postUrl}</id>
-          <updated>${new Date(post.date).toISOString()}</updated>
+          <updated>${lastUpdated}</updated>
           <summary>${escapeXml(post.excerpt)}</summary>
           <author>
             <name>HumanizeAI Pro</name>
@@ -45,7 +46,7 @@ export async function GET() {
   <link href="${feedUrl}" rel="self" />
   <link href="${blogUrl}" />
   <id>${feedUrl}</id>
-  <updated>${new Date().toISOString()}</updated>
+  <updated>${lastUpdated}</updated>
   <author>
     <name>HumanizeAI Pro</name>
   </author>

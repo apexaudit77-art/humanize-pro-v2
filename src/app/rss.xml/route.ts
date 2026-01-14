@@ -17,7 +17,8 @@ function escapeXml(unsafe: string) {
 export async function GET() {
   const posts = await getPosts();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://humanize-ai.ooguy.com';
-  
+  const lastBuildDate = new Date().toUTCString();
+
   const rssItems = posts
     .map(post => {
       const postUrl = `${baseUrl}/blog/${post.slug}`;
@@ -26,7 +27,7 @@ export async function GET() {
           <title>${escapeXml(post.title)}</title>
           <link>${postUrl}</link>
           <description>${escapeXml(post.excerpt)}</description>
-          <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+          <pubDate>${lastBuildDate}</pubDate>
           <guid isPermaLink="true">${postUrl}</guid>
         </item>
       `;
@@ -40,7 +41,7 @@ export async function GET() {
     <link>${baseUrl}/blog</link>
     <description>Tips, tricks, and updates on AI content and SEO from Humanize AI Pro.</description>
     <language>en-us</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
     ${rssItems}
   </channel>
