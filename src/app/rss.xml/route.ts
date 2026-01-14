@@ -17,7 +17,7 @@ function escapeXml(unsafe: string) {
 export async function GET() {
   const posts = await getPosts();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://humanize-ai.ooguy.com';
-  const lastBuildDate = new Date().toUTCString();
+  const lastBuildDate = new Date().toISOString();
 
   const rssItems = posts
     .map(post => {
@@ -27,7 +27,7 @@ export async function GET() {
           <title>${escapeXml(post.title)}</title>
           <link>${postUrl}</link>
           <description>${escapeXml(post.excerpt)}</description>
-          <pubDate>${lastBuildDate}</pubDate>
+          <pubDate>${new Date(post.date).toUTCString()}</pubDate>
           <guid isPermaLink="true">${postUrl}</guid>
         </item>
       `;
