@@ -24,12 +24,14 @@ export async function GET() {
   const atomItems = posts
     .map(post => {
       const postUrl = `${baseUrl}/blog/${post.slug}`;
+      // Use a consistent, valid date to prevent build errors
+      const postUpdated = new Date().toISOString();
       return `
         <entry>
           <title>${escapeXml(post.title)}</title>
           <link href="${postUrl}" />
           <id>${postUrl}</id>
-          <updated>${lastUpdated}</updated>
+          <updated>${postUpdated}</updated>
           <summary>${escapeXml(post.excerpt)}</summary>
           <author>
             <name>HumanizeAI Pro</name>
