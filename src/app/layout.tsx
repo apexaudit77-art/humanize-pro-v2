@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
 import { BackgroundOrbs } from '@/components/background-orbs';
 import { PageLoader } from '@/components/page-loader';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -47,6 +48,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FR6P8X409N');
+          `}
+        </Script>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
