@@ -48,18 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        {/* <!-- Google tag (gtag.js) --> */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-FR6P8X409N');
-            `,
-          }}
-        />
+        {/* <!-- Google Tag Manager --> */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -69,6 +58,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-K3RHZ8XC');`,
           }}
         />
+        {/* <!-- End Google Tag Manager --> */}
+        
+        {/* <!-- Google Publisher Center --> */}
         <script async type="application/javascript"
         src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
         <script
@@ -85,6 +77,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             `,
           }}
         />
+        {/* <!-- End Google Publisher Center --> */}
       </head>
       <body
         className={cn(
@@ -93,6 +86,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           spaceGrotesk.variable
         )}
       >
+        {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-K3RHZ8XC"
@@ -101,6 +95,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
+        {/* <!-- End Google Tag Manager (noscript) --> */}
         <FirebaseClientProvider config={firebaseConfig}>
           <ThemeProvider
             attribute="class"
