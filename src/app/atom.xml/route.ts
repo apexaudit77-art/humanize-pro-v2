@@ -45,7 +45,7 @@ export async function GET() {
   <link href="${feedUrl}" rel="self" />
   <link href="${blogUrl}" />
   <id>${feedUrl}</id>
-  <updated>${posts.length > 0 ? new Date(posts[0].date).toISOString() : new Date().toISOString()}</updated>
+  <updated>${new Date().toISOString()}</updated>
   <author>
     <name>HumanizeAI Pro</name>
   </author>
