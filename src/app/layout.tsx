@@ -24,9 +24,6 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://humanize-ai.ooguy.com'),
   title: 'HumanizeAI Pro',
   description: 'Bypass AI Detection & Humanize AI Text',
-  verification: {
-    google: ['EwoaFJ3i8-R_j8ypafDpHst3QL1Rmk-J4xoKnh-pyYQ', 'xWQvbaslX0JKKhTCPf1bDdazgW34ObNxU11P0SqKDIc'],
-  },
 };
 
 export default function RootLayout({
