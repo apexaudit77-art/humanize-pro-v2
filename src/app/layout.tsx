@@ -39,18 +39,22 @@ export default function RootLayout({
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    measurementId: "G-FR6P8X409N",
   };
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <Script id="gtm-script" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-K3RHZ8XC');`}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N`}
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FR6P8X409N');
+          `}
         </Script>
       </head>
       <body
@@ -60,8 +64,6 @@ export default function RootLayout({
           spaceGrotesk.variable
         )}
       >
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3RHZ8XC" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
-
         <FirebaseClientProvider config={firebaseConfig}>
           <ThemeProvider
             attribute="class"
