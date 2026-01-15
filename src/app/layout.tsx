@@ -44,11 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N`}
+        <Script 
+          src='https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N' 
+          strategy='beforeInteractive' 
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id='google-analytics' strategy='beforeInteractive'>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
