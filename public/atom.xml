@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HumanizeAI Pro Blog</title>
+  <subtitle>Tips, tricks, and updates on AI content and SEO.</subtitle>
+  <id>https://humanize-ai.ooguy.com/blog</id>
+  <link href="https://humanize-ai.ooguy.com/atom.xml" rel="self"/>
+  <link href="https://humanize-ai.ooguy.com/blog"/>
+  <updated>2024-07-23T00:00:00Z</updated>
+  <author>
+    <name>HumanizeAI Pro</name>
+  </author>
+</feed>
