@@ -45,38 +45,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        {/* <!-- Google tag (gtag.js) --> */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Google Tag Manager */}
+        <Script id="gtm-head" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FR6P8X409N');
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-K3RHZ8XC');
           `}
         </Script>
-        
-        {/* <!-- Google Publisher Center --> */}
-        <script async type="application/javascript"
-        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-                basicSubscriptions.init({
-                  type: "NewsArticle",
-                  isPartOfType: ["Product"],
-                  isPartOfProductId: "CAow2IHFDA:openaccess",
-                  clientOptions: { theme: "light", lang: "en" },
-                });
-              });
-            `,
-          }}
-        />
-        {/* <!-- End Google Publisher Center --> */}
+        {/* End Google Tag Manager */}
       </head>
       <body
         className={cn(
@@ -85,6 +64,17 @@ export default function RootLayout({
           spaceGrotesk.variable
         )}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-K3RHZ8XC"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         <FirebaseClientProvider config={firebaseConfig}>
           <ThemeProvider
             attribute="class"
