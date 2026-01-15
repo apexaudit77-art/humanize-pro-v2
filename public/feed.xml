@@ -1,1 +1,19 @@
-<!-- This file is generated automatically. Do not edit. -->
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HumanizeAI Pro Blog</title>
+  <subtitle>Latest news and articles from HumanizeAI Pro</subtitle>
+  <link href="https://humanize-ai.ooguy.com/feed.xml" rel="self"/>
+  <link href="https://humanize-ai.ooguy.com/blog"/>
+  <updated>2024-01-01T00:00:00Z</updated>
+  <id>https://humanize-ai.ooguy.com/</id>
+  <author>
+    <name>HumanizeAI Pro</name>
+  </author>
+  <entry>
+    <title>Welcome to Our Blog</title>
+    <link href="https://humanize-ai.ooguy.com/blog/first-post"/>
+    <updated>2024-01-01T00:00:00Z</updated>
+    <id>https://humanize-ai.ooguy.com/blog/first-post</id>
+    <content type="html">This is the first post on our brand new blog.</content>
+  </entry>
+</feed>
