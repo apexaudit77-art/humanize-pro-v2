@@ -61,13 +61,14 @@ export function PageLoader() {
       >
         <div className="relative animate-pulse">
           <Image
-            src="/logo-main.png"
+            src="/logo-icon.png"
             alt="Humanize AI Logo"
-            width={200}
-            height={50}
+            width={80}
+            height={80}
             priority
+            className="rounded-2xl"
           />
-          <div className="absolute -inset-4 brand-mesh rounded-full blur-2xl opacity-30 animate-gradient"></div>
+          <div className="absolute -inset-4 brand-mesh rounded-full blur-3xl opacity-50 animate-gradient"></div>
         </div>
       </div>
     </>
