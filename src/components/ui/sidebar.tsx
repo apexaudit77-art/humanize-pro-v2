@@ -56,17 +56,14 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 
-interface SidebarProps {
-  lang: string;
-  dir: 'ltr' | 'rtl';
-  config: any;
-}
-
 const Footer = () => (
-    <footer className="w-full py-8 text-center text-sm text-muted-foreground border-t border-border/10">
-        <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
-            <p>&copy; {new Date().getFullYear()} HumanizeAI Pro. All rights reserved.</p>
-            <div className="flex gap-4 md:gap-6 flex-wrap justify-center">
+    <footer className="w-full py-8 text-sm text-muted-foreground border-t border-border/10">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
+            <div className="flex items-center gap-3">
+                <Image src="/logo-icon.png" alt="Humanize AI Icon" width={32} height={32} className="rounded-md" />
+                <p className="text-center md:text-left">&copy; {new Date().getFullYear()} HumanizeAI Pro. All rights reserved.</p>
+            </div>
+            <div className="flex gap-4 md:gap-6 flex-wrap justify-center md:justify-end">
                 <Link href="/about" className="hover:text-primary transition-colors">About</Link>
                 <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
                 <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
