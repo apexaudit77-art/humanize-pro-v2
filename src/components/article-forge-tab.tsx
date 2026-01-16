@@ -39,8 +39,6 @@ import {
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateArticle } from '@/app/actions';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 const categories = [
   { name: 'Sports', icon: <Disc className="w-5 h-5 mr-2" /> },
@@ -135,6 +133,8 @@ export function ArticleForgeTab({ config }: ArticleForgeTabProps) {
 
   const handleDownloadPdf = async () => {
     if (resultRef.current) {
+      const { default: jsPDF } = await import('jspdf');
+      const { default: html2canvas } = await import('html2canvas');
       const canvas = await html2canvas(resultRef.current);
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
