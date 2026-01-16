@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Loader2, Mail, X } from 'lucide-react';
 import Link from 'next/link';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
 
 const GoogleIcon = () => (
@@ -61,17 +61,9 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     
     const handleGoogleLogin = async () => {
         setIsGoogleLoading(true);
-        try {
-            console.log("بداية عملية التسجيل...");
-            const result = await signInWithPopup(auth, googleProvider);
-            console.log("تم التسجيل بنجاح:", result.user);
-            window.location.reload(); 
-        } catch (error: any) {
-            console.error("خطأ فايربيس الكامل:", error);
-            alert("حدث خطأ: " + error.code); // سيظهر لك رسالة تنبيه على الشاشة بالخطأ
-        } finally {
-            setIsGoogleLoading(false);
-        }
+        console.log("Initiating Google Sign-In with Redirect...");
+        // Errors will be caught by getRedirectResult on page load
+        await signInWithRedirect(auth, googleProvider);
     };
 
     return (

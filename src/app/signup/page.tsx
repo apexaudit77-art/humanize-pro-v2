@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithRedirect, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -88,23 +88,9 @@ export default function SignupPage() {
 
   async function handleGoogleSignIn() {
     setIsGoogleLoading(true);
-    console.log("Attempting Google Sign-In...");
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log('Login Success', result.user);
-      toast({ title: 'Signed up with Google successfully!' });
-    } catch (error: any) {
-      console.error('Login Error:', error);
-      alert(`Google Sign-In Failed: ${error.message}`);
-      toast({
-        variant: 'destructive',
-        title: 'Google Sign-Up Failed',
-        description: error.message,
-      });
-    } finally {
-      setIsGoogleLoading(false);
-      console.log("Google Sign-In process finished.");
-    }
+    console.log("Initiating Google Sign-In with Redirect...");
+    // Errors will be caught by getRedirectResult on page load
+    await signInWithRedirect(auth, googleProvider);
   }
 
   if (isUserLoading || user) {
