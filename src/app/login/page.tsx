@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,7 +7,7 @@ import * as z from 'zod';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -28,7 +27,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { useUser } from '@/firebase';
+import { useUser, useAuth } from '@/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -51,6 +50,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
   const { user, isUserLoading } = useUser();
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,9 +64,9 @@ export default function LoginPage() {
   }, [user, isUserLoading, router]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!auth) return;
     setIsLoading(true);
     try {
-      const auth = getAuth();
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast({ title: 'Login successful!' });
     } catch (error: any) {
@@ -81,9 +81,9 @@ export default function LoginPage() {
   }
 
   async function handleGoogleSignIn() {
+    if (!auth) return;
     setIsGoogleLoading(true);
     try {
-        const auth = getAuth();
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
         toast({ title: 'Signed in with Google successfully!' });
@@ -173,7 +173,7 @@ export default function LoginPage() {
             </Button>
           </CardContent>
           <CardFooter className="justify-center text-sm">
-            <p>Don\'t have an account?&nbsp;</p>
+            <p>Don't have an account?&nbsp;</p>
             <Link href="/signup" className="font-semibold text-primary hover:underline">
               Sign up
             </Link>

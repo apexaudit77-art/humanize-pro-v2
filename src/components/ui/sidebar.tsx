@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -51,7 +50,7 @@ import {
 import Image from "next/image";
 import { SeoContent } from "../seo-content";
 import { NewsletterForm } from "../newsletter-form";
-import { useUser } from "@/firebase";
+import { useUser, useAuth } from "@/firebase";
 import {
   Dialog,
   DialogContent,
@@ -60,7 +59,7 @@ import {
   DialogTitle,
   DialogClose,
 } from "./dialog";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => (
@@ -210,6 +209,7 @@ export function Sidebar({ lang, dir, config }) {
   const [showLoginModal, setShowLoginModal] = React.useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = React.useState(false);
   const { toast } = useToast();
+  const auth = useAuth();
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -225,9 +225,9 @@ export function Sidebar({ lang, dir, config }) {
   }, []);
 
   async function handleGoogleSignIn() {
+    if (!auth) return;
     setIsGoogleLoading(true);
     try {
-      const auth = getAuth();
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast({ title: "Signed in with Google successfully!" });

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,7 +7,7 @@ import * as z from 'zod';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -28,7 +27,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { useUser } from '@/firebase';
+import { useUser, useAuth } from '@/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -53,6 +52,7 @@ export default function SignupPage() {
   const { toast } = useToast();
   const router = useRouter();
   const { user, isUserLoading } = useUser();
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,9 +66,9 @@ export default function SignupPage() {
   },[user, isUserLoading, router]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!auth) return;
     setIsLoading(true);
     try {
-      const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       if(userCredential.user){
         await updateProfile(userCredential.user, { displayName: values.name });
@@ -86,9 +86,9 @@ export default function SignupPage() {
   }
 
   async function handleGoogleSignIn() {
+    if (!auth) return;
     setIsGoogleLoading(true);
     try {
-      const auth = getAuth();
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast({ title: 'Signed up with Google successfully!' });
