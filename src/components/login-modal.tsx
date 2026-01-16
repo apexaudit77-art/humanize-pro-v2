@@ -14,7 +14,6 @@ import { Loader2, Mail, X } from 'lucide-react';
 import Link from 'next/link';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
-import { useToast } from '@/hooks/use-toast';
 
 const GoogleIcon = () => (
     <svg
@@ -60,7 +59,7 @@ const modalConfig = {
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     
-    const handleGoogleSignIn = async () => {
+    const handleGoogleLogin = async () => {
         setIsGoogleLoading(true);
         try {
             console.log("بداية عملية التسجيل...");
@@ -90,7 +89,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     <Button
                         variant="outline"
                         className="w-full h-12 text-lg"
-                        onClick={handleGoogleSignIn}
+                        onClick={handleGoogleLogin}
                         disabled={isGoogleLoading}
                     >
                         {isGoogleLoading ? (
