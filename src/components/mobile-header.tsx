@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react";
@@ -50,7 +49,7 @@ export function MobileHeader({ navItems, lang, activeSection, onSectionChange }:
             </Sheet>
             <div className="flex-1">
                 <Link href={`/`} className="flex items-center gap-2 font-semibold">
-                    <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }}/>
+                    <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain' }}/>
                 </Link>
             </div>
             <div className="flex items-center gap-1">
