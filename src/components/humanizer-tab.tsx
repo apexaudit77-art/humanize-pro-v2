@@ -147,7 +147,7 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
        <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
             <DialogContent className="sm:max-w-md bg-card/80 backdrop-blur-lg border-border/50">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-headline text-center">Unlock Free Humanization</DialogTitle>
+                    <DialogTitle className="text-2xl font-headline text-center">Unlock Free Access</DialogTitle>
                     <DialogDescription className="text-center text-lg pt-2 text-muted-foreground">
                        Sign in to convert your AI text to human-like content instantly.
                     </DialogDescription>
