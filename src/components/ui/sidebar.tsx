@@ -134,7 +134,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
-export function Sidebar({ lang, dir, config }) {
+export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: any }) {
   const navItems: NavItem[] = [
     {
       id: "humanizer",
