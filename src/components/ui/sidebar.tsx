@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import * as React from 'react';
@@ -20,6 +19,9 @@ import {
   ThumbsUp,
   ChevronsLeft,
   ChevronsRight,
+  Mail,
+  X,
+  Loader2,
 } from 'lucide-react';
 import type { NavItem } from '@/lib/types';
 import { HumanizerTab } from '../humanizer-tab';
@@ -48,8 +50,11 @@ import {
 } from './tooltip';
 import Image from 'next/image';
 import { SeoContent } from '../seo-content';
-import { AuthGuard } from '../auth-guard';
 import { NewsletterForm } from '../newsletter-form';
+import { useUser } from '@/firebase';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from "./dialog";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useToast } from '@/hooks/use-toast';
 
 interface SidebarProps {
   lang: string;
@@ -73,6 +78,15 @@ const Footer = () => (
             </div>
         </div>
     </footer>
+);
+
+const GoogleIcon = () => (
+    <svg className="mr-3 h-5 w-5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+      <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+      <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+      <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.223,0-9.65-3.317-11.297-7.962l-6.571,4.819C9.656,39.663,16.318,44,24,44z" />
+      <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C43.021,36.251,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+</svg>
 );
 
 
@@ -148,6 +162,10 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
 
   const [activeSection, setActiveSection] = React.useState(navItems[0].id);
   const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const { user } = useUser();
+  const [showLoginModal, setShowLoginModal] = React.useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = React.useState(false);
+  const { toast } = useToast();
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -162,9 +180,33 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  async function handleGoogleSignIn() {
+    setIsGoogleLoading(true);
+    try {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        toast({ title: 'Signed in with Google successfully!' });
+        setShowLoginModal(false);
+    } catch (error: any) {
+        toast({
+            variant: 'destructive',
+            title: 'Google Sign-In Failed',
+            description: error.message,
+        });
+    } finally {
+        setIsGoogleLoading(false);
+    }
+  }
+
   const handleSectionChange = (sectionId: string) => {
-    setActiveSection(sectionId);
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    // For guests, show the humanizer tool, but prompt login for other tools.
+    if (!user && sectionId !== 'humanizer') {
+      setShowLoginModal(true);
+    } else {
+      setActiveSection(sectionId);
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const renderContent = () => {
@@ -182,7 +224,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl transition-all duration-300"></p>
             </div>
             <div className="mt-8 md:mt-12 transition-all duration-300 relative z-10">
-              <HumanizerTab config={config.humanizerTab} />
+              <HumanizerTab config={config.humanizerTab} setShowLoginModal={setShowLoginModal} />
             </div>
           </section>
         );
@@ -315,6 +357,38 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
 
   return (
     <TooltipProvider>
+      <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
+        <DialogContent className="sm:max-w-md bg-card/80 backdrop-blur-lg border-border/50">
+            <DialogHeader>
+                <DialogTitle className="text-2xl font-headline text-center">Join for Free Access</DialogTitle>
+                <DialogDescription className="text-center text-lg pt-2 text-muted-foreground">
+                    Sign in to humanize your AI text and bypass detectors instantly.
+                </DialogDescription>
+            </DialogHeader>
+            <div className="py-4 space-y-3">
+                <Button variant="outline" className="w-full h-12 text-lg" onClick={handleGoogleSignIn} disabled={isGoogleLoading}>
+                    {isGoogleLoading ? (
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    ) : (
+                        <GoogleIcon />
+                    )}
+                    Continue with Google
+                </Button>
+                <Button variant="secondary" className="w-full h-12 text-lg" asChild>
+                    <Link href="/login">
+                        <Mail className="mr-3 h-5 w-5" />
+                        Login with Email
+                    </Link>
+                </Button>
+            </div>
+            <DialogClose asChild>
+                <Button type="button" variant="ghost" size="icon" className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Close</span>
+                </Button>
+            </DialogClose>
+        </DialogContent>
+      </Dialog>
       <div
         ref={containerRef}
         className={cn(

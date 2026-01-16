@@ -26,8 +26,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "./ui/skeleton";
 import { useUser } from "@/firebase";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from "./ui/dialog";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const tones = ["Professional", "Academic", "Casual", "Creative", "Friendly", "Formal"];
 
@@ -48,24 +46,14 @@ interface HumanizerTabProps {
         outputTitle: string;
         outputPlaceholder: string;
         yourText: string;
-    }
+    };
+    setShowLoginModal: (show: boolean) => void;
 }
 
-const GoogleIcon = () => (
-    <svg className="mr-3 h-5 w-5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-      <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-      <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
-      <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.223,0-9.65-3.317-11.297-7.962l-6.571,4.819C9.656,39.663,16.318,44,24,44z" />
-      <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C43.021,36.251,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-    </svg>
-);
-
-export function HumanizerTab({ config }: HumanizerTabProps) {
+export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const { toast } = useToast();
   const { user } = useUser();
 
@@ -76,25 +64,6 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
       tone: "Professional",
     },
   });
-
-  async function handleGoogleSignIn() {
-    setIsGoogleLoading(true);
-    try {
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
-        toast({ title: 'Signed in with Google successfully!' });
-        setShowLoginModal(false);
-    } catch (error: any) {
-        toast({
-            variant: 'destructive',
-            title: 'Google Sign-In Failed',
-            description: error.message,
-        });
-    } finally {
-        setIsGoogleLoading(false);
-    }
-  }
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     if (!user) {
@@ -144,32 +113,6 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
 
   return (
     <div className="flex justify-center w-full py-6">
-       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-            <DialogContent className="sm:max-w-md bg-card/80 backdrop-blur-lg border-border/50">
-                <DialogHeader>
-                    <DialogTitle className="text-2xl font-headline text-center">Unlock Free Access</DialogTitle>
-                    <DialogDescription className="text-center text-lg pt-2 text-muted-foreground">
-                       Sign in to convert your AI text to human-like content instantly.
-                    </DialogDescription>
-                </DialogHeader>
-                <div className="py-4">
-                    <Button variant="outline" className="w-full h-12 text-lg" onClick={handleGoogleSignIn} disabled={isGoogleLoading}>
-                        {isGoogleLoading ? (
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        ) : (
-                            <GoogleIcon />
-                        )}
-                        Continue with Google
-                    </Button>
-                </div>
-                <DialogClose asChild>
-                    <Button type="button" variant="ghost" size="icon" className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
-                        <X className="h-4 w-4" />
-                        <span className="sr-only">Close</span>
-                    </Button>
-                </DialogClose>
-            </DialogContent>
-        </Dialog>
       <div className="w-full max-w-5xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
