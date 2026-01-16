@@ -1,8 +1,9 @@
+
 'use client';
 
 import { getApps, initializeApp, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider, type Auth } from 'firebase/auth';
+import { getFirestore, type Firestore } from 'firebase/firestore';
 
 export interface FirebaseConfig {
   projectId?: string;
@@ -24,37 +25,42 @@ export const firebaseConfig: FirebaseConfig = {
     appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
-
+export const auth: Auth = getAuth(app);
+export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
+
+// Always prompt for account selection
 googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
+interface FirebaseServices {
+    firebaseApp: FirebaseApp | null;
+    auth: Auth | null;
+    firestore: Firestore | null;
+}
 
-// IMPORTANT: DO NOT MODIFY THIS FUNCTION
-export function initializeFirebase(config: FirebaseConfig = firebaseConfig) {
+export function initializeFirebase(config: FirebaseConfig = firebaseConfig): FirebaseServices {
   if (getApps().length) {
-    return getSdks(getApp());
+    const existingApp = getApp();
+    return {
+      firebaseApp: existingApp,
+      auth: getAuth(existingApp),
+      firestore: getFirestore(existingApp)
+    };
   }
 
   if (!config?.apiKey) {
      console.error("Firebase config is missing API Key. Initialization failed.");
-    // Return a mock structure to prevent crashing the app
     return { firebaseApp: null, auth: null, firestore: null };
   }
 
-  const firebaseApp = initializeApp(config);
-  return getSdks(firebaseApp);
-}
-
-export function getSdks(firebaseApp: FirebaseApp) {
+  const newApp = initializeApp(config);
   return {
-    firebaseApp,
-    auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp)
+    firebaseApp: newApp,
+    auth: getAuth(newApp),
+    firestore: getFirestore(newApp)
   };
 }

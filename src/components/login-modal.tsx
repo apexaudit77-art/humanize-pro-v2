@@ -13,8 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2, Mail, X } from 'lucide-react';
 import Link from 'next/link';
 import { signInWithPopup } from 'firebase/auth';
-import { useAuth } from '@/firebase';
-import { googleProvider } from '@/lib/firebase';
+import { auth, googleProvider } from '@/lib/firebase';
 import { useToast } from '@/hooks/use-toast';
 
 const GoogleIcon = () => (
@@ -60,19 +59,11 @@ const modalConfig = {
 
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-    const auth = useAuth();
     const { toast } = useToast();
 
     async function handleGoogleSignIn() {
-        if (!auth) {
-            toast({
-                variant: "destructive",
-                title: "Authentication Error",
-                description: "Firebase Auth is not initialized correctly.",
-            });
-            return;
-        }
         setIsGoogleLoading(true);
+        console.log("Attempting Google Sign-In...");
         try {
           const result = await signInWithPopup(auth, googleProvider);
           console.log('Login Success', result.user);
@@ -80,6 +71,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           onClose();
         } catch (error: any) {
           console.error("Login Error:", error);
+          alert(`Google Sign-In Failed: ${error.message}`);
           toast({
             variant: "destructive",
             title: "Google Sign-In Failed",
@@ -87,6 +79,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           });
         } finally {
           setIsGoogleLoading(false);
+          console.log("Google Sign-In process finished.");
         }
     }
 

@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useUser, useAuth } from '@/firebase';
-import { googleProvider } from '@/lib/firebase';
+import { auth, googleProvider } from '@/lib/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -51,7 +51,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
   const { user, isUserLoading } = useUser();
-  const auth = useAuth();
+  const authInstance = useAuth(); // Use the hook
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,10 +65,10 @@ export default function LoginPage() {
   }, [user, isUserLoading, router]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!auth) return;
+    if (!authInstance) return;
     setIsLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      await signInWithEmailAndPassword(authInstance, values.email, values.password);
       toast({ title: 'Login successful!' });
     } catch (error: any) {
       toast({
@@ -82,14 +82,15 @@ export default function LoginPage() {
   }
 
   async function handleGoogleSignIn() {
-    if (!auth) return;
     setIsGoogleLoading(true);
+    console.log("Attempting Google Sign-In...");
     try {
         const result = await signInWithPopup(auth, googleProvider);
         console.log('Login Success', result.user);
         toast({ title: 'Signed in with Google successfully!' });
     } catch (error: any) {
         console.error('Login Error:', error);
+        alert(`Google Sign-In Failed: ${error.message}`);
         toast({
             variant: 'destructive',
             title: 'Google Sign-In Failed',
@@ -97,6 +98,7 @@ export default function LoginPage() {
         });
     } finally {
         setIsGoogleLoading(false);
+        console.log("Google Sign-In process finished.");
     }
   }
   
