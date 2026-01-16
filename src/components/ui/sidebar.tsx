@@ -200,12 +200,14 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
   }
 
   const handleSectionChange = (sectionId: string) => {
-    // For guests, prompt login before switching to any tool.
     if (!user) {
       setShowLoginModal(true);
     } else {
       setActiveSection(sectionId);
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -365,7 +367,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
                     Sign in to convert your AI content to human-like text for free.
                 </DialogDescription>
             </DialogHeader>
-            <div className="py-4 space-y-3">
+            <div className="py-4 space-y-4">
                 <Button variant="outline" className="w-full h-12 text-lg" onClick={handleGoogleSignIn} disabled={isGoogleLoading}>
                     {isGoogleLoading ? (
                         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -374,7 +376,29 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
                     )}
                     Continue with Google
                 </Button>
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t border-border/50" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-card px-2 text-muted-foreground">Or</span>
+                    </div>
+                </div>
+                <Button asChild variant="secondary" className="w-full h-12 text-lg">
+                    <Link href="/login">
+                        <Mail className="mr-3 h-5 w-5" />
+                        Continue with Email
+                    </Link>
+                </Button>
             </div>
+            
+            <p className="text-center text-sm text-muted-foreground">
+                Don't have an account?{' '}
+                <Link href="/signup" className="font-semibold text-primary hover:underline">
+                    Sign up
+                </Link>
+            </p>
+
             <DialogClose asChild>
                 <Button type="button" variant="ghost" size="icon" className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
                     <X className="h-4 w-4" />
