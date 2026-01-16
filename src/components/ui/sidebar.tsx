@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -509,10 +510,9 @@ export function Sidebar({ lang, dir, config }) {
                   <Image
                     src="/logo-main.png"
                     alt="Humanize AI Logo"
-                    width={160}
-                    height={40}
+                    width={180}
+                    height={45}
                     priority
-                    style={{ objectFit: "contain", aspectRatio: "160 / 40" }}
                   />
                 )}
               </Link>

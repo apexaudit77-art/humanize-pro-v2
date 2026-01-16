@@ -13,7 +13,7 @@ export default async function Blog() {
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="flex w-full items-center justify-between py-4 md:py-6 border-b border-border/50">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }} />
+            <Image src="/logo-main.png" alt="Humanize AI Logo" width={180} height={45} priority />
           </Link>
           <Button asChild>
             <Link href="/">Back to Home</Link>

@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react";
@@ -38,7 +39,7 @@ export function MobileHeader({ navItems, lang, activeSection, onSectionChange }:
                 <SheetContent side={dir === 'rtl' ? 'right' : 'left'} className="flex flex-col bg-muted/80 backdrop-blur-lg p-0 w-full max-w-xs">
                     <div className="flex h-16 items-center border-b px-4 lg:h-[60px] lg:px-6">
                         <Link href={`/`} className="flex items-center gap-2 font-semibold">
-                            <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }} />
+                            <Image src="/logo-main.png" alt="Humanize AI Logo" width={180} height={45} priority />
                         </Link>
                     </div>
                     <div className="flex-1 overflow-y-auto py-4">
@@ -48,7 +49,7 @@ export function MobileHeader({ navItems, lang, activeSection, onSectionChange }:
             </Sheet>
             <div className="flex-1">
                 <Link href={`/`} className="flex items-center gap-2 font-semibold">
-                    <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }}/>
+                    <Image src="/logo-main.png" alt="Humanize AI Logo" width={180} height={45} priority />
                 </Link>
             </div>
             <div className="flex items-center gap-1">
