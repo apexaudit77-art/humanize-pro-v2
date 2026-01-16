@@ -57,6 +57,7 @@ export default function RootLayout({
             gtag('config', 'G-FR6P8X409N');
           `}
         </Script>
+        <link rel="icon" href="/logo-icon.png" type="image/png" sizes="32x32" />
       </head>
       <body
         className={cn(
