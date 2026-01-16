@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -233,6 +234,7 @@ export function Sidebar({ lang, dir, config }) {
       toast({ title: "Signed in with Google successfully!" });
       setShowLoginModal(false);
     } catch (error: any) {
+      console.error("Google Sign-In Error:", error);
       toast({
         variant: "destructive",
         title: "Google Sign-In Failed",
@@ -504,7 +506,7 @@ export function Sidebar({ lang, dir, config }) {
                     height={32}
                     className="rounded-md"
                     priority
-                    style={{ aspectRatio: '32 / 32' }}
+                    style={{ aspectRatio: '1 / 1' }}
                   />
                 ) : (
                   <Image
@@ -513,6 +515,7 @@ export function Sidebar({ lang, dir, config }) {
                     width={180}
                     height={45}
                     priority
+                    style={{ aspectRatio: '180 / 45' }}
                   />
                 )}
               </Link>
