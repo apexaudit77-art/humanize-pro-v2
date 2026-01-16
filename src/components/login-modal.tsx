@@ -59,29 +59,21 @@ const modalConfig = {
 
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-    const { toast } = useToast();
-
-    async function handleGoogleSignIn() {
+    
+    const handleGoogleSignIn = async () => {
         setIsGoogleLoading(true);
-        console.log("Attempting Google Sign-In...");
         try {
-          const result = await signInWithPopup(auth, googleProvider);
-          console.log('Login Success', result.user);
-          toast({ title: "Signed in with Google successfully!" });
-          onClose();
+            console.log("بداية عملية التسجيل...");
+            const result = await signInWithPopup(auth, googleProvider);
+            console.log("تم التسجيل بنجاح:", result.user);
+            window.location.reload(); 
         } catch (error: any) {
-          console.error("Login Error:", error);
-          alert(`Google Sign-In Failed: ${error.message}`);
-          toast({
-            variant: "destructive",
-            title: "Google Sign-In Failed",
-            description: error.message,
-          });
+            console.error("خطأ فايربيس الكامل:", error);
+            alert("حدث خطأ: " + error.code); // سيظهر لك رسالة تنبيه على الشاشة بالخطأ
         } finally {
-          setIsGoogleLoading(false);
-          console.log("Google Sign-In process finished.");
+            setIsGoogleLoading(false);
         }
-    }
+    };
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
