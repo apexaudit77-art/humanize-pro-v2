@@ -36,7 +36,7 @@ export default function RootLayout({
     apiKey: "AIzaSyCoq5sje4AOlk9E2lCsZMKfnWTzRIZ5CL4",
     authDomain: "studio-6364957707-14ef1.firebaseapp.com",
     projectId: "studio-6364957707-14ef1",
-    storageBucket: "studio-6364957707-14ef1.appspot.com",
+    storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
     messagingSenderId: "1039388373906",
     appId: "1:1039388373906:web:81753e053e420d501e474b",
     measurementId: "G-FR6P8X409N"

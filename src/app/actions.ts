@@ -131,12 +131,13 @@ export async function subscribeToNewsletter(email: string): Promise<ActionResult
   try {
     // This is a server action, so we can re-initialize firebase here
     const { firestore } = initializeFirebase({
-        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-        appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+      apiKey: "AIzaSyCoq5sje4AOlk9E2lCsZMKfnWTzRIZ5CL4",
+      authDomain: "studio-6364957707-14ef1.firebaseapp.com",
+      projectId: "studio-6364957707-14ef1",
+      storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
+      messagingSenderId: "1039388373906",
+      appId: "1:1039388373906:web:81753e053e420d501e474b",
+      measurementId: "G-FR6P8X409N"
     });
 
     if (!firestore) {
