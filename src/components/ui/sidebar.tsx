@@ -360,9 +360,9 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
         <DialogContent className="sm:max-w-md bg-card/80 backdrop-blur-lg border-border/50">
             <DialogHeader>
-                <DialogTitle className="text-2xl font-headline text-center">Join for Free Access</DialogTitle>
+                <DialogTitle className="text-2xl font-headline text-center">Unlock Free AI Humanizer</DialogTitle>
                 <DialogDescription className="text-center text-lg pt-2 text-muted-foreground">
-                    Sign in to humanize your AI text and bypass detectors instantly.
+                    Sign in to convert your AI content to human-like text for free.
                 </DialogDescription>
             </DialogHeader>
             <div className="py-4 space-y-3">
@@ -373,12 +373,6 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
                         <GoogleIcon />
                     )}
                     Continue with Google
-                </Button>
-                <Button variant="secondary" className="w-full h-12 text-lg" asChild>
-                    <Link href="/login">
-                        <Mail className="mr-3 h-5 w-5" />
-                        Login with Email
-                    </Link>
                 </Button>
             </div>
             <DialogClose asChild>
@@ -416,7 +410,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               >
                 {isCollapsed ? (
                   <Image
-                    src="/assets/logo-icon.png"
+                    src="/logo-icon.png"
                     alt="Humanize AI Logo"
                     width={32}
                     height={32}
@@ -425,7 +419,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
                   />
                 ) : (
                   <Image
-                    src="/assets/logo-main.png"
+                    src="/logo-main.png"
                     alt="Humanize AI Logo"
                     width={160}
                     height={40}

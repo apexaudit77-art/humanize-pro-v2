@@ -1,3 +1,4 @@
+
 import { getPostBySlug } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -19,7 +20,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
         <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <header className="flex w-full items-center justify-between py-4 md:py-6 border-b border-border/50">
                 <Link href="/" className="flex items-center gap-3">
-                    <Image src="/assets/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }} />
+                    <Image src="/logo-main.png" alt="Humanize AI Logo" width={160} height={40} priority style={{ objectFit: 'contain', aspectRatio: '160 / 40' }} />
                 </Link>
                 <Button asChild variant="outline">
                     <Link href="/blog">
