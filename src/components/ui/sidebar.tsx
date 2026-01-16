@@ -200,8 +200,8 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
   }
 
   const handleSectionChange = (sectionId: string) => {
-    // For guests, show the humanizer tool, but prompt login for other tools.
-    if (!user && sectionId !== 'humanizer') {
+    // For guests, prompt login before switching to any tool.
+    if (!user) {
       setShowLoginModal(true);
     } else {
       setActiveSection(sectionId);
