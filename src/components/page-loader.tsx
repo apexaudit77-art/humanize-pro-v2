@@ -61,7 +61,7 @@ export function PageLoader() {
       >
         <div className="relative animate-pulse">
           <Image
-            src="/assets/logo-main.png"
+            src="/logo-main.png"
             alt="Humanize AI Logo"
             width={200}
             height={50}
