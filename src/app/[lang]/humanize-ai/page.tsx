@@ -114,6 +114,15 @@ const pageConfig = {
         verificationSuiteDescription: "Ensure your content is original and passes AI detection.",
         seoSuiteTitle: "Advanced SEO Suite",
         seoSuiteDescription: "Elevate your content's ranking and visibility.",
+    },
+    loginModal: {
+        title: "Join for Free Access",
+        description: "Sign in to humanize your AI text and bypass detectors instantly.",
+        googleButton: "Continue with Google",
+        emailButton: "Continue with Email",
+        or: "Or",
+        signupText: "Don't have an account?",
+        signupLink: "Sign up",
     }
   },
   ar: {
@@ -227,6 +236,15 @@ const pageConfig = {
         verificationSuiteDescription: "تأكد من أن المحتوى الخاص بك أصلي ويتجاوز كشف الذكاء الاصطناعي.",
         seoSuiteTitle: "مجموعة أدوات تحسين محركات البحث المتقدمة",
         seoSuiteDescription: "ارتقِ بترتيب المحتوى الخاص بك ورؤيته.",
+    },
+    loginModal: {
+        title: "انضم للحصول على وصول مجاني",
+        description: "سجل الدخول لأنسنة نص الذكاء الاصطناعي وتجاوز الكواشف على الفور.",
+        googleButton: "المتابعة باستخدام جوجل",
+        emailButton: "المتابعة بالبريد الإلكتروني",
+        or: "أو",
+        signupText: "ليس لديك حساب؟",
+        signupLink: "أنشئ حسابًا",
     }
   },
   es: {
@@ -340,6 +358,15 @@ const pageConfig = {
         verificationSuiteDescription: "Asegúrese de que su contenido sea original y pase la detección de IA.",
         seoSuiteTitle: "Suite SEO Avanzada",
         seoSuiteDescription: "Eleve el ranking y la visibilidad de su contenido.",
+    },
+    loginModal: {
+        title: "Únete para Acceso Gratuito",
+        description: "Inicia sesión para humanizar tu texto de IA y eludir los detectores al instante.",
+        googleButton: "Continuar con Google",
+        emailButton: "Continuar con Email",
+        or: "O",
+        signupText: "¿No tienes una cuenta?",
+        signupLink: "Regístrate",
     }
   },
 };
