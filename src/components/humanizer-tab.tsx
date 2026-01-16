@@ -26,6 +26,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "./ui/skeleton";
+import { useUser } from "@/firebase";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "./ui/alert-dialog";
+import Link from "next/link";
 
 const tones = ["Professional", "Academic", "Casual", "Creative", "Friendly", "Formal"];
 
@@ -53,7 +56,9 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const { toast } = useToast();
+  const { user } = useUser();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -64,6 +69,10 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (!user) {
+        setShowAuthModal(true);
+        return;
+    }
     setIsLoading(true);
     setResult("");
     const response = await humanizeText(data.text, data.tone);
@@ -107,6 +116,22 @@ export function HumanizerTab({ config }: HumanizerTabProps) {
 
   return (
     <div className="flex justify-center w-full py-6">
+       <AlertDialog open={showAuthModal} onOpenChange={setShowAuthModal}>
+            <AlertDialogContent dir="rtl">
+                <AlertDialogHeader>
+                    <AlertDialogTitle>مطلوب تسجيل الدخول</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        يرجى تسجيل الدخول أو إنشاء حساب جديد لاستخدام هذه الميزة مجاناً.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                        <Link href="/login">تسجيل الدخول</Link>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
       <div className="w-full max-w-5xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import * as React from 'react';
@@ -181,9 +182,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl transition-all duration-300"></p>
             </div>
             <div className="mt-8 md:mt-12 transition-all duration-300 relative z-10">
-              <AuthGuard>
-                <HumanizerTab config={config.humanizerTab} />
-              </AuthGuard>
+              <HumanizerTab config={config.humanizerTab} />
             </div>
           </section>
         );
@@ -193,9 +192,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="article-forge"
             className="flex flex-col justify-center min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <ArticleForgeTab config={config.articleForgeTab} />
-            </AuthGuard>
+            <ArticleForgeTab config={config.articleForgeTab} />
           </section>
         );
       case 'article-formatter':
@@ -204,9 +201,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="article-formatter"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <ArticleFormatterTab />
-            </AuthGuard>
+            <ArticleFormatterTab />
           </section>
         );
       case 'document-analyzer':
@@ -215,9 +210,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="document-analyzer"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <DocumentAnalyzerTab />
-            </AuthGuard>
+            <DocumentAnalyzerTab />
           </section>
         );
       case 'ai-detector':
@@ -235,12 +228,8 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               </p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <AuthGuard>
-                <AiDetectorTab config={config.aiDetectorTab} />
-              </AuthGuard>
-              <AuthGuard>
-                <PlagiarismCheckerTab config={config.plagiarismCheckerTab} />
-              </AuthGuard>
+              <AiDetectorTab config={config.aiDetectorTab} />
+              <PlagiarismCheckerTab config={config.plagiarismCheckerTab} />
             </div>
           </section>
         );
@@ -259,12 +248,8 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               </p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <AuthGuard>
-                <AiDetectorTab config={config.aiDetectorTab} />
-              </AuthGuard>
-              <AuthGuard>
-                <PlagiarismCheckerTab config={config.plagiarismCheckerTab} />
-              </AuthGuard>
+              <AiDetectorTab config={config.aiDetectorTab} />
+              <PlagiarismCheckerTab config={config.plagiarismCheckerTab} />
             </div>
           </section>
         );
@@ -283,9 +268,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
               </p>
             </div>
             <div className="max-w-4xl mx-auto w-full">
-              <AuthGuard>
-                <SeoToolsTab config={config.seoToolsTab} />
-              </AuthGuard>
+              <SeoToolsTab config={config.seoToolsTab} />
             </div>
           </section>
         );
@@ -295,9 +278,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="grammar-checker"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <GrammarCheckerTab />
-            </AuthGuard>
+            <GrammarCheckerTab />
           </section>
         );
       case 'citation-generator':
@@ -306,9 +287,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="citation-generator"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <CitationGeneratorTab />
-            </AuthGuard>
+            <CitationGeneratorTab />
           </section>
         );
       case 'ai-translator':
@@ -317,9 +296,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="ai-translator"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <AiTranslatorTab />
-            </AuthGuard>
+            <AiTranslatorTab />
           </section>
         );
       case 'social-media-expert':
@@ -328,9 +305,7 @@ export function Sidebar({ lang, dir, config }: SidebarProps) {
             id="social-media-expert"
             className="min-h-screen transition-all duration-300"
           >
-            <AuthGuard>
-              <SocialMediaExpertTab />
-            </AuthGuard>
+            <SocialMediaExpertTab />
           </section>
         );
       default:
