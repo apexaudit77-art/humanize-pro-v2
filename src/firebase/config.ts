@@ -1,10 +1,2 @@
 
-export interface FirebaseConfig {
-  projectId?: string;
-  appId?: string;
-  apiKey?: string;
-  authDomain?: string;
-  messagingSenderId?: string;
-  storageBucket?: string;
-  measurementId?: string;
-};
+// This file is deprecated. The config has been moved to src/lib/firebase.ts

@@ -1,36 +1,7 @@
 'use client';
 
-import { getApps, initializeApp, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { type FirebaseConfig } from './config';
-
-
-// IMPORTANT: DO NOT MODIFY THIS FUNCTION
-export function initializeFirebase(config: FirebaseConfig) {
-  if (getApps().length) {
-    return getSdks(getApp());
-  }
-
-  // The config is now passed directly from the provider, so we can rely on it being present.
-  if (!config?.apiKey) {
-     console.error("Firebase config is missing API Key. Initialization failed.");
-    // Return a mock structure to prevent crashing the app
-    return { firebaseApp: null, auth: null, firestore: null };
-  }
-
-  const firebaseApp = initializeApp(config);
-  return getSdks(firebaseApp);
-}
-
-export function getSdks(firebaseApp: FirebaseApp) {
-  return {
-    firebaseApp,
-    auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp)
-  };
-}
-
+// This file is now a barrel that re-exports from the new central firebase lib and other modules.
+export * from '@/lib/firebase'; 
 export * from './provider';
 export * from './client-provider';
 export * from './firestore/use-collection';

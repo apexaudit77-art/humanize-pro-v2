@@ -9,6 +9,7 @@ import { FirebaseClientProvider } from '@/firebase';
 import { BackgroundOrbs } from '@/components/background-orbs';
 import { PageLoader } from '@/components/page-loader';
 import Script from 'next/script';
+import { firebaseConfig } from '@/lib/firebase';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,16 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCoq5sje4AOlk9E2lCsZMKfnWTzRIZ5CL4",
-    authDomain: "studio-6364957707-14ef1.firebaseapp.com",
-    projectId: "studio-6364957707-14ef1",
-    storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
-    messagingSenderId: "1039388373906",
-    appId: "1:1039388373906:web:81753e053e420d501e474b",
-    measurementId: "G-FR6P8X409N"
-  };
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
