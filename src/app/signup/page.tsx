@@ -72,7 +72,8 @@ export default function SignupPage() {
     try {
       const userCredential = await createUserWithEmailAndPassword(authInstance, values.email, values.password);
       if(userCredential.user){
-        await updateProfile(userCredential.user, { displayName: values.name });
+        // Fire-and-forget profile update to not block UI
+        updateProfile(userCredential.user, { displayName: values.name });
       }
       toast({ title: 'Account created successfully!' });
     } catch (error: any) {
@@ -88,8 +89,8 @@ export default function SignupPage() {
 
   async function handleGoogleSignIn() {
     setIsGoogleLoading(true);
-    console.log("Initiating Google Sign-In with Redirect...");
-    // Errors will be caught by getRedirectResult on page load
+    // signInWithRedirect is better for compatibility and avoids popup blockers.
+    // Errors will be caught by getRedirectResult on page load via FirebaseClientProvider.
     await signInWithRedirect(auth, googleProvider);
   }
 
