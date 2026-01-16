@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -28,6 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useUser, useAuth } from '@/firebase';
+import { googleProvider } from '@/lib/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -89,10 +90,11 @@ export default function SignupPage() {
     if (!auth) return;
     setIsGoogleLoading(true);
     try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log('Login Success', result.user);
       toast({ title: 'Signed up with Google successfully!' });
     } catch (error: any) {
+      console.error('Login Error:', error);
       toast({
         variant: 'destructive',
         title: 'Google Sign-Up Failed',

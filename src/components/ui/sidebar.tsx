@@ -60,7 +60,8 @@ import {
   DialogTitle,
   DialogClose,
 } from "./dialog";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
+import { googleProvider } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => (
@@ -229,12 +230,12 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
     if (!auth) return;
     setIsGoogleLoading(true);
     try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log('Login Success', result.user);
       toast({ title: "Signed in with Google successfully!" });
       setShowLoginModal(false);
     } catch (error: any) {
-      console.error("Google Sign-In Error:", error);
+      console.error("Login Error:", error);
       toast({
         variant: "destructive",
         title: "Google Sign-In Failed",

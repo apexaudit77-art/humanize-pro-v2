@@ -1,7 +1,7 @@
 'use client';
 
 import { getApps, initializeApp, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 export interface FirebaseConfig {
@@ -21,9 +21,19 @@ export const firebaseConfig: FirebaseConfig = {
     projectId: "studio-6364957707-14ef1",
     storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
     messagingSenderId: "1039388373906",
-    appId: "1:1039388373906:web:81753e053e420d501e474b",
-    measurementId: "G-FR6P8X409N"
+    appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
 
 // IMPORTANT: DO NOT MODIFY THIS FUNCTION
 export function initializeFirebase(config: FirebaseConfig = firebaseConfig) {

@@ -12,8 +12,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Loader2, Mail, X } from 'lucide-react';
 import Link from 'next/link';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { useAuth } from '@/firebase';
+import { googleProvider } from '@/lib/firebase';
 import { useToast } from '@/hooks/use-toast';
 
 const GoogleIcon = () => (
@@ -73,12 +74,12 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         }
         setIsGoogleLoading(true);
         try {
-          const provider = new GoogleAuthProvider();
-          await signInWithPopup(auth, provider);
+          const result = await signInWithPopup(auth, googleProvider);
+          console.log('Login Success', result.user);
           toast({ title: "Signed in with Google successfully!" });
           onClose();
         } catch (error: any) {
-          console.error("Google Sign-In Error:", error);
+          console.error("Login Error:", error);
           toast({
             variant: "destructive",
             title: "Google Sign-In Failed",
