@@ -6,12 +6,20 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
 export function PageLoader() {
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isDone, setIsDone] = useState(false);
   const [progress, setProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
+    // This ensures the component only renders on the client, preventing hydration errors.
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     setIsLoading(true);
     setIsDone(false);
     setProgress(0);
@@ -33,8 +41,11 @@ export function PageLoader() {
       clearTimeout(finishTimer);
       clearTimeout(doneTimer);
     }
-  }, [pathname]);
+  }, [pathname, mounted]);
 
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <>
