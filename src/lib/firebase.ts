@@ -20,8 +20,8 @@ export const firebaseConfig: FirebaseConfig = {
     authDomain: "studio-6364957707-14ef1.firebaseapp.com",
     projectId: "studio-6364957707-14ef1",
     storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
-    messagingSenderId: "917749739660",
-    appId: "1:917749739660:web:81753e053e420d501e474b"
+    messagingSenderId: "1039388373906",
+    appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
 
 const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
@@ -30,9 +30,10 @@ export const auth: Auth = getAuth(app);
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Always prompt for account selection
+// Always prompt for account selection and set custom Client ID
 googleProvider.setCustomParameters({
-  prompt: 'select_account'
+  prompt: 'select_account',
+  client_id: '1039388373906-4heu6925l8v0h3ctqaqu6p4nrtq7kocv.apps.googleusercontent.com'
 });
 
 interface FirebaseServices {
