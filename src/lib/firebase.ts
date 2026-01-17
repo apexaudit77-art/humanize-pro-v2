@@ -30,7 +30,7 @@ export const auth: Auth = getAuth(app);
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// ربط الـ Client ID الذي أرسلته and always prompt for account selection
+// Set custom parameters to ensure correct client ID and prompt for account selection.
 googleProvider.setCustomParameters({
   prompt: 'select_account',
   client_id: '1039388373906-4heu6925l8v0h3ctqaqu6p4nrtq7kocv.apps.googleusercontent.com'

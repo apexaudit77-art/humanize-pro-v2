@@ -72,7 +72,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         try {
             await signInWithRedirect(authInstance, googleProvider);
         } catch (error: any) {
-            console.error("Google Sign-In Error:", error);
+            console.error("Google Sign-In Initiation Error:", error);
             toast({
                 variant: 'destructive',
                 title: 'Sign In Failed',

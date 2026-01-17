@@ -31,11 +31,11 @@ export function FirebaseClientProvider({ children, config }: FirebaseClientProvi
         })
         .catch((error) => {
           // Handle Errors here.
-          console.error("Redirect sign-in error:", error);
+          console.error("Firebase Redirect Result Error:", error.code, error.message);
           toast({
             variant: 'destructive',
-            title: 'Sign-In Failed',
-            description: error.message,
+            title: 'Sign-In Failed After Redirect',
+            description: `Error: ${error.message}`,
           });
         });
     }
