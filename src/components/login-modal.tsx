@@ -65,13 +65,21 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     
     const handleGoogleLogin = async () => {
         if (!authInstance) {
-          toast({ variant: 'destructive', title: 'Error', description: 'Authentication service is not available.' });
+          toast({ variant: 'destructive', title: 'Error', description: 'Authentication service not available.' });
           return;
         }
         setIsGoogleLoading(true);
-        console.log("Initiating Google Sign-In with Redirect...");
-        // Errors will be caught by getRedirectResult on page load
-        await signInWithRedirect(authInstance, googleProvider);
+        try {
+            await signInWithRedirect(authInstance, googleProvider);
+        } catch (error: any) {
+            console.error("Google Sign-In Error:", error);
+            toast({
+                variant: 'destructive',
+                title: 'Sign In Failed',
+                description: error.message || 'Could not initiate Google Sign-In.',
+            });
+            setIsGoogleLoading(false);
+        }
     };
 
     return (

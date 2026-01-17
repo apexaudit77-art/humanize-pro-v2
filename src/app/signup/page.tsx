@@ -93,9 +93,17 @@ export default function SignupPage() {
       return;
     }
     setIsGoogleLoading(true);
-    // signInWithRedirect is better for compatibility and avoids popup blockers.
-    // Errors will be caught by getRedirectResult on page load via FirebaseClientProvider.
-    await signInWithRedirect(authInstance, googleProvider);
+    try {
+        await signInWithRedirect(authInstance, googleProvider);
+    } catch (error: any) {
+        console.error("Google Sign-In Error:", error);
+        toast({
+            variant: 'destructive',
+            title: 'Sign In Failed',
+            description: error.message || 'Could not initiate Google Sign-In.',
+        });
+        setIsGoogleLoading(false);
+    }
   }
 
   if (isUserLoading || user) {
