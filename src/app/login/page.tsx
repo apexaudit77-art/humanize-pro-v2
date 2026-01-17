@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useUser, useAuth } from '@/firebase';
-import { auth, googleProvider } from '@/lib/firebase';
+import { googleProvider } from '@/lib/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -82,10 +82,14 @@ export default function LoginPage() {
   }
 
   async function handleGoogleSignIn() {
+    if (!authInstance) {
+      toast({ variant: 'destructive', title: 'Error', description: 'Authentication service not available.' });
+      return;
+    }
     setIsGoogleLoading(true);
     console.log("Initiating Google Sign-In with Redirect...");
     // Errors will be caught by getRedirectResult on page load
-    await signInWithRedirect(auth, googleProvider);
+    await signInWithRedirect(authInstance, googleProvider);
   }
   
   if (isUserLoading || user) {

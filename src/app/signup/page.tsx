@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useUser, useAuth } from '@/firebase';
-import { auth, googleProvider } from '@/lib/firebase';
+import { googleProvider } from '@/lib/firebase';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -88,10 +88,14 @@ export default function SignupPage() {
   }
 
   async function handleGoogleSignIn() {
+    if (!authInstance) {
+      toast({ variant: 'destructive', title: 'Error', description: 'Authentication service is not available.' });
+      return;
+    }
     setIsGoogleLoading(true);
     // signInWithRedirect is better for compatibility and avoids popup blockers.
     // Errors will be caught by getRedirectResult on page load via FirebaseClientProvider.
-    await signInWithRedirect(auth, googleProvider);
+    await signInWithRedirect(authInstance, googleProvider);
   }
 
   if (isUserLoading || user) {

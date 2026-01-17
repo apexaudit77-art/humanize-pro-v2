@@ -13,7 +13,9 @@ import { Button } from '@/components/ui/button';
 import { Loader2, Mail, X } from 'lucide-react';
 import Link from 'next/link';
 import { signInWithRedirect } from 'firebase/auth';
-import { auth, googleProvider } from '@/lib/firebase';
+import { googleProvider } from '@/lib/firebase';
+import { useAuth } from '@/firebase';
+import { useToast } from '@/hooks/use-toast';
 
 const GoogleIcon = () => (
     <svg
@@ -58,12 +60,18 @@ const modalConfig = {
 
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+    const authInstance = useAuth();
+    const { toast } = useToast();
     
     const handleGoogleLogin = async () => {
+        if (!authInstance) {
+          toast({ variant: 'destructive', title: 'Error', description: 'Authentication service is not available.' });
+          return;
+        }
         setIsGoogleLoading(true);
         console.log("Initiating Google Sign-In with Redirect...");
         // Errors will be caught by getRedirectResult on page load
-        await signInWithRedirect(auth, googleProvider);
+        await signInWithRedirect(authInstance, googleProvider);
     };
 
     return (
