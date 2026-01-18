@@ -17,7 +17,7 @@ export interface FirebaseConfig {
 // This is the single source of truth for the Firebase config.
 export const firebaseConfig: FirebaseConfig = {
     apiKey: "AIzaSyCoq5sjE4AOlk9E2lCsZMKfnWTzRIZ5CL4",
-    authDomain: "studio-6364957707-14ef1.firebaseapp.com",
+    authDomain: "humanize-ai.ooguy.com",
     projectId: "studio-6364957707-14ef1",
     storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
     messagingSenderId: "1039388373906",
