@@ -23,7 +23,12 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL('https://humanize-ai.ooguy.com'),
   title: 'HumanizeAI Pro',
-  description: 'Bypass AI Detection & Humanize AI Text',
+  description: 'Convert AI text to human-like content',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -47,7 +52,6 @@ export default function RootLayout({
             gtag('config', 'G-FR6P8X409N');
           `}
         </Script>
-        <link rel="icon" href="/logo-icon.png" sizes="any" />
       </head>
       <body
         className={cn(
