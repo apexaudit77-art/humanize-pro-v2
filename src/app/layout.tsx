@@ -9,7 +9,6 @@ import { FirebaseClientProvider } from '@/firebase';
 import { BackgroundOrbs } from '@/components/background-orbs';
 import { PageLoader } from '@/components/page-loader';
 import Script from 'next/script';
-import { firebaseConfig } from '@/lib/firebase';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -57,7 +56,7 @@ export default function RootLayout({
           spaceGrotesk.variable
         )}
       >
-        <FirebaseClientProvider config={firebaseConfig}>
+        <FirebaseClientProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"

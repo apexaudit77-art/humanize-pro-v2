@@ -24,19 +24,11 @@ export const firebaseConfig: FirebaseConfig = {
     appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
 
-// Singleton initialization function to prevent re-initialization
-function initializeSingletonApp(config: FirebaseConfig): FirebaseApp {
-    const apps = getApps();
-    if (apps.length > 0) {
-        return apps[0];
-    }
-    return initializeApp(config);
-}
-
-// Initialize the app as a singleton
-const app: FirebaseApp = initializeSingletonApp(firebaseConfig);
+// Initialize Firebase as a singleton
+const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 // Export singleton instances of the services
+export const firebaseApp: FirebaseApp = app;
 export const auth: Auth = getAuth(app);
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();

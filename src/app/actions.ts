@@ -8,7 +8,7 @@ import { generateSeoArticle, type GenerateSeoArticleInput } from '@/ai/flows/gen
 import { generateSemanticHeaderTags } from '@/ai/flows/generate-semantic-header-tags';
 import { integrateLsiKeywords } from '@/ai/flows/integrate-lsi-keywords';
 import { removeAiPatterns } from '@/ai/flows/remove-ai-patterns';
-import { initializeFirebase } from '@/lib/firebase';
+import { firestore } from '@/lib/firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 interface ActionResult {
@@ -129,10 +129,6 @@ export async function subscribeToNewsletter(email: string): Promise<ActionResult
   }
   
   try {
-    // This is a server action, so we can re-initialize firebase here
-    // It will use the default config from '@/lib/firebase'
-    const { firestore } = initializeFirebase();
-
     if (!firestore) {
       throw new Error('Firestore is not initialized.');
     }
