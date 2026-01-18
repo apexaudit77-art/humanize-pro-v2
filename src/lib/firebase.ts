@@ -1,28 +1,25 @@
-'use client';
 
-import { getApps, initializeApp, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, type Auth } from 'firebase/auth';
+import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from 'firebase/firestore';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCoq5sjE4AOlk9E2lCsZMKfnWTzRIZ5CL4",
-    authDomain: "humanize-ai.ooguy.com",
-    projectId: "studio-6364957707-14ef1",
-    storageBucket: "studio-6364957707-14ef1.firebasestorage.app",
-    messagingSenderId: "1039388373906",
-    appId: "1:1039388373906:web:81753e053e420d501e474b"
+const firebaseConfig = { 
+    apiKey: "AIzaSyCoq5sjE4AOlk9E2lCsZMKfnWTzRIZ5CL4", 
+    authDomain: "humanize-ai.ooguy.com", 
+    projectId: "studio-6364957707-14ef1", 
+    storageBucket: "studio-6364957707-14ef1.firebasestorage.app", 
+    messagingSenderId: "1039388373906", 
+    appId: "1:1039388373906:web:81753e053e420d501e474b" 
 };
 
-// تهيئة آمنة تمنع خطأ التحميل
-const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+// Safe initialization to prevent reloading error
+const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig); 
 
-// Export singleton instances of the services
 export const firebaseApp: FirebaseApp = app;
-export const auth: Auth = getAuth(app);
+export const auth: Auth = getAuth(app); 
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// إعدادات إضافية لضمان عمل الهوية
 googleProvider.setCustomParameters({ 
   prompt: 'select_account' 
 });
