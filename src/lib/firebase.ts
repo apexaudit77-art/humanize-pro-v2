@@ -24,7 +24,7 @@ export const firebaseConfig: FirebaseConfig = {
     appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
 
-// Initialize Firebase as a singleton
+// تهيئة آمنة تمنع خطأ التحميل
 const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 // Export singleton instances of the services
@@ -33,10 +33,9 @@ export const auth: Auth = getAuth(app);
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Set custom parameters to ensure correct client ID and prompt for account selection.
-googleProvider.setCustomParameters({
-  prompt: 'select_account',
-  client_id: '1039388373906-4heu6925l8v0h3ctqaqu6p4nrtq7kocv.apps.googleusercontent.com'
+// إعدادات إضافية لضمان عمل الهوية
+googleProvider.setCustomParameters({ 
+  prompt: 'select_account' 
 });
 
 interface FirebaseServices {
