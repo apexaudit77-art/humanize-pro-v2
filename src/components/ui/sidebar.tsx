@@ -2,6 +2,7 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { MobileHeader } from "@/components/mobile-header";
@@ -19,19 +20,9 @@ import {
   ThumbsUp,
   ChevronsLeft,
   ChevronsRight,
+  Loader2,
 } from "lucide-react";
 import type { NavItem } from "@/lib/types";
-import { HumanizerTab } from "../humanizer-tab";
-import { ArticleForgeTab } from "../article-forge-tab";
-import { AiDetectorTab } from "../ai-detector-tab";
-import { PlagiarismCheckerTab } from "../plagiarism-checker-tab";
-import { GrammarCheckerTab } from "../grammar-checker-tab";
-import { SeoToolsTab } from "../seo-tools-tab";
-import { DocumentAnalyzerTab } from "../document-analyzer-tab";
-import { CitationGeneratorTab } from "../citation-generator-tab";
-import { AiTranslatorTab } from "../ai-translator-tab";
-import { ArticleFormatterTab } from "../article-formatter-tab";
-import { SocialMediaExpertTab } from "../social-media-expert-tab";
 import { FeatureCards } from "../feature-cards";
 import { Separator } from "./separator";
 import Link from "next/link";
@@ -50,6 +41,27 @@ import { SeoContent } from "../seo-content";
 import { NewsletterForm } from "../newsletter-form";
 import { useUser } from "@/firebase";
 import { LoginModal } from '../login-modal';
+
+// Loader for dynamic components
+const DynamicTabLoader = () => (
+    <div className="flex items-center justify-center h-full min-h-[60vh] w-full">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+    </div>
+);
+
+// Dynamically import all the tab components
+const HumanizerTab = dynamic(() => import("../humanizer-tab").then((mod) => mod.HumanizerTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const ArticleForgeTab = dynamic(() => import("../article-forge-tab").then((mod) => mod.ArticleForgeTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const AiDetectorTab = dynamic(() => import("../ai-detector-tab").then((mod) => mod.AiDetectorTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const PlagiarismCheckerTab = dynamic(() => import("../plagiarism-checker-tab").then((mod) => mod.PlagiarismCheckerTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const GrammarCheckerTab = dynamic(() => import("../grammar-checker-tab").then((mod) => mod.GrammarCheckerTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const SeoToolsTab = dynamic(() => import("../seo-tools-tab").then((mod) => mod.SeoToolsTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const DocumentAnalyzerTab = dynamic(() => import("../document-analyzer-tab").then((mod) => mod.DocumentAnalyzerTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const CitationGeneratorTab = dynamic(() => import("../citation-generator-tab").then((mod) => mod.CitationGeneratorTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const AiTranslatorTab = dynamic(() => import("../ai-translator-tab").then((mod) => mod.AiTranslatorTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const ArticleFormatterTab = dynamic(() => import("../article-formatter-tab").then((mod) => mod.ArticleFormatterTab), { loading: () => <DynamicTabLoader />, ssr: false });
+const SocialMediaExpertTab = dynamic(() => import("../social-media-expert-tab").then((mod) => mod.SocialMediaExpertTab), { loading: () => <DynamicTabLoader />, ssr: false });
+
 
 const Footer = () => (
   <footer className="w-full py-8 text-sm text-muted-foreground border-t border-border/10">
