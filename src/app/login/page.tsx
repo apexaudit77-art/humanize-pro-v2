@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword, signInWithRedirect } from 'firebase/auth';
@@ -48,6 +48,7 @@ const GoogleIcon = () => (
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
   const { user, isUserLoading } = useUser();
@@ -145,7 +146,23 @@ export default function LoginPage() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="********" {...field} />
+                        <div className="relative">
+                           <Input
+                              type={showPassword ? "text" : "password"}
+                              placeholder="********"
+                              {...field}
+                            />
+                           <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground"
+                              onClick={() => setShowPassword((prev) => !prev)}
+                           >
+                              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                              <span className="sr-only">Toggle password visibility</span>
+                           </Button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
