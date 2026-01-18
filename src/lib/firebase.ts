@@ -24,8 +24,19 @@ export const firebaseConfig: FirebaseConfig = {
     appId: "1:1039388373906:web:81753e053e420d501e474b"
 };
 
-const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+// Singleton initialization function to prevent re-initialization
+function initializeSingletonApp(config: FirebaseConfig): FirebaseApp {
+    const apps = getApps();
+    if (apps.length > 0) {
+        return apps[0];
+    }
+    return initializeApp(config);
+}
 
+// Initialize the app as a singleton
+const app: FirebaseApp = initializeSingletonApp(firebaseConfig);
+
+// Export singleton instances of the services
 export const auth: Auth = getAuth(app);
 export const firestore: Firestore = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
@@ -43,25 +54,14 @@ interface FirebaseServices {
 }
 
 export function initializeFirebase(config: FirebaseConfig = firebaseConfig): FirebaseServices {
-  if (getApps().length) {
-    const existingApp = getApp();
-    return {
-      firebaseApp: existingApp,
-      auth: getAuth(existingApp),
-      firestore: getFirestore(existingApp)
-    };
-  }
-
-  if (!config?.apiKey) {
-     console.error("Firebase config is missing API Key. Initialization failed.");
-    return { firebaseApp: null, auth: null, firestore: null };
-  }
-
-  const newApp = initializeApp(config);
+  // This function now consistently returns the already-initialized singleton instances.
+  // This ensures all parts of the app (providers, server actions) use the same instance.
+  const appInstance = getApps().length ? getApp() : initializeApp(config);
+  
   return {
-    firebaseApp: newApp,
-    auth: getAuth(newApp),
-    firestore: getFirestore(newApp)
+    firebaseApp: appInstance,
+    auth: getAuth(appInstance),
+    firestore: getFirestore(appInstance)
   };
 }
 
