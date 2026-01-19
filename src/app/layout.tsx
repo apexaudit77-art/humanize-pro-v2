@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
@@ -24,6 +23,15 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://humanize-ai.ooguy.com'),
   title: 'HumanizeAI Pro',
   description: 'Convert AI text to human-like content',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -35,8 +43,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <Script 
           src='https://www.googletagmanager.com/gtag/js?id=G-FR6P8X409N' 
           strategy='beforeInteractive' 
