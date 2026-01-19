@@ -21,12 +21,32 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://humanize-ai.ooguy.com'),
-  title: 'HumanizeAI Pro',
-  description: 'Convert AI text to human-like content',
+  title: {
+    default: 'Humanize AI Pro | تحويل نص الذكاء الاصطناعي إلى نص بشري',
+    template: '%s | Humanize AI Pro'
+  },
+  description: 'أفضل أداة مجانية لتحويل نصوص الذكاء الاصطناعي (ChatGPT, Gemini) إلى نصوص بشرية بنسبة 100% لتجاوز أدوات كشف المحتوى وتحسين ترتيبك في جوجل.',
+  keywords: [
+    'Humanize AI',
+    'تحويل نص الذكاء الاصطناعي',
+    'تخطي كاشف الذكاء الاصطناعي',
+    'AI to Human Text Converter',
+    'Bypass AI Detection',
+    'إعادة صياغة النصوص'
+  ],
+  authors: [{ name: 'Humanize AI Pro' }],
+  creator: 'Humanize AI Pro',
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
+  },
+  openGraph: {
+    title: 'Humanize AI Pro - اجعل نصوصك تبدو كأنها كُتبت بواسطة بشر',
+    description: 'حوّل نصوص AI إلى محتوى إبداعي بشري بضغطة زر واحدة.',
+    url: 'https://humanize-ai.ooguy.com',
+    siteName: 'Humanize AI Pro',
+    locale: 'ar_SA',
+    type: 'website',
   },
 };
 
