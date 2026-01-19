@@ -20,17 +20,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://humanize-ai.ooguy.com'),
+  metadataBase: new URL('https://www.humanize-ai.ooguy.com'),
   title: {
-    default: 'Humanize AI Pro | محول نص الذكاء الاصطناعي إلى نص بشري 100%',
+    default: 'Humanize AI Pro | محول نص الذكاء الاصطناعي إلى بشري وتخطي الكواشف',
     template: '%s | Humanize AI Pro'
   },
-  description: 'أفضل أداة لـ Humanize AI وتخطّي كواشف المحتوى مثل GPTZero و Originality. حوّل نصوص ChatGPT إلى نصوص بشرية غير قابلة للكشف مجاناً.',
-  keywords: [
-    'Humanize AI', 'Bypass AI Detection', 'AI to Human Converter', 
-    'Undetectable AI', 'تحويل نص الذكاء الاصطناعي', 'تخطي كاشف AI', 
-    'إعادة صياغة النصوص بشرياً', 'ChatGPT to Human Text'
-  ],
+  description: 'أفضل أداة مجانية لتحويل نصوص AI إلى محتوى بشري 100% وتجاوز GPTZero و Turnitin.',
+  keywords: ['Humanize AI', 'Bypass AI Detection', 'AI to Human Converter', 'تحويل نص AI'],
   authors: [{ name: 'Humanize AI Pro' }],
   creator: 'Humanize AI Pro',
   icons: {
@@ -38,12 +34,12 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   alternates: {
-    canonical: 'https://humanize-ai.ooguy.com',
+    canonical: 'https://www.humanize-ai.ooguy.com/',
   },
   openGraph: {
     title: 'Humanize AI Pro - اجعل نصوصك بشرية وتخطى الكواشف',
     description: 'الأداة رقم #1 لتحويل محتوى AI إلى محتوى بشري إبداعي.',
-    url: 'https://humanize-ai.ooguy.com',
+    url: 'https://www.humanize-ai.ooguy.com',
     siteName: 'Humanize AI Pro',
     locale: 'ar_SA',
     type: 'website',
