@@ -24,13 +24,9 @@ export const metadata: Metadata = {
   title: 'HumanizeAI Pro',
   description: 'Convert AI text to human-like content',
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon.png', type: 'image/png', sizes: '32x32' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png' },
-    ],
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
