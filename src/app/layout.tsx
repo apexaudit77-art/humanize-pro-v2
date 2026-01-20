@@ -43,7 +43,10 @@ export const metadata: Metadata = {
     siteName: 'Humanize AI Pro',
     locale: 'ar_SA',
     type: 'website',
-  }
+  },
+  verification: {
+    google: 'fY3wxYACZTx5QkIdxdtu91H32nLFmCVeqwFWc0-jwBc',
+  },
 };
 
 export default function RootLayout({
