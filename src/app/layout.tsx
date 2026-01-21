@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Humanize AI Pro' }],
   creator: 'Humanize AI Pro',
   icons: {
-    icon: '/favicon.ico?v=1',
+    icon: '/favicon.ico?v=3',
   },
   alternates: {
     canonical: 'https://www.humanize-ai.ooguy.com/',
