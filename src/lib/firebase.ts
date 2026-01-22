@@ -1,10 +1,9 @@
-
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from 'firebase/firestore';
 
 const firebaseConfig = { 
-    apiKey: "AIzaSyCoq5sjE4AOlk9E2lCsZMKfnWTzRIZ5CL4", 
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
     authDomain: "humanize-ai.ooguy.com", 
     projectId: "studio-6364957707-14ef1", 
     storageBucket: "studio-6364957707-14ef1.firebasestorage.app", 
