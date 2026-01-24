@@ -4,7 +4,7 @@ import { getFirestore, type Firestore } from 'firebase/firestore';
 
 const firebaseConfig = { 
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
-    authDomain: "humanize-ai.ooguy.com", 
+    authDomain: "humanize-ai-pro.firebaseapp.com", 
     projectId: "studio-6364957707-14ef1", 
     storageBucket: "studio-6364957707-14ef1.firebasestorage.app", 
     messagingSenderId: "1039388373906", 
