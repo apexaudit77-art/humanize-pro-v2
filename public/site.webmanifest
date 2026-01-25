@@ -1,6 +1,11 @@
 {
     "name": "HumanizeAI Pro",
     "short_name": "HumanizeAI",
+    "description": "The #1 tool to humanize AI content and bypass detectors.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#C026D3",
     "icons": [
         {
             "src": "/icon-192.png",
@@ -12,8 +17,5 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "theme_color": "#020617",
-    "background_color": "#020617",
-    "display": "standalone"
+    ]
 }

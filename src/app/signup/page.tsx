@@ -104,7 +104,7 @@ export default function SignupPage() {
     try {
         await signInWithPopup(authInstance, googleProvider);
         toast({ title: 'Account created successfully!' });
-        router.push('/en/humanize-ai');
+        window.location.href = '/en/humanize-ai';
     } catch (error: any) {
         console.error("Google Sign-In Error:", error);
         toast({

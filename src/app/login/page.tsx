@@ -91,7 +91,7 @@ export default function LoginPage() {
     try {
         await signInWithPopup(authInstance, googleProvider);
         toast({ title: 'Login successful!' });
-        router.push('/en/humanize-ai');
+        window.location.href = '/en/humanize-ai';
     } catch (error: any) {
         console.error("Google Sign-In Error:", error);
         toast({
