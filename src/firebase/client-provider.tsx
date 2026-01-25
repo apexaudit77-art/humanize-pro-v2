@@ -5,6 +5,7 @@ import { FirebaseProvider } from '@/firebase/provider';
 import { firebaseApp, auth, firestore } from '@/lib/firebase';
 import { getRedirectResult } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 interface FirebaseClientProviderProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface FirebaseClientProviderProps {
 
 export function FirebaseClientProvider({ children }: FirebaseClientProviderProps) {
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     // `auth` is a stable singleton import, so it can be used directly.
@@ -21,6 +23,7 @@ export function FirebaseClientProvider({ children }: FirebaseClientProviderProps
           // This is the sign-in result.
           console.log("Redirect sign-in success:", result.user);
           toast({ title: 'Signed in successfully!' });
+          router.push('/en/humanize-ai');
         }
       })
       .catch((error) => {
@@ -32,7 +35,7 @@ export function FirebaseClientProvider({ children }: FirebaseClientProviderProps
           description: `Error: ${error.message}`,
         });
       });
-  }, [toast]);
+  }, [toast, router]);
 
 
   return (
