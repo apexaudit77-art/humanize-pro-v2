@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword, signInWithRedirect, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -102,14 +102,17 @@ export default function SignupPage() {
     }
     setIsGoogleLoading(true);
     try {
-        await signInWithRedirect(authInstance, googleProvider);
+        await signInWithPopup(authInstance, googleProvider);
+        toast({ title: 'Account created successfully!' });
+        // The useEffect hook will now handle the redirection.
     } catch (error: any) {
-        console.error("Google Sign-In Initiation Error:", error);
+        console.error("Google Sign-In Error:", error);
         toast({
             variant: 'destructive',
-            title: 'Sign In Failed',
-            description: error.message || 'Could not initiate Google Sign-In.',
+            title: 'Sign Up Failed',
+            description: error.message || 'Could not complete Google Sign-In.',
         });
+    } finally {
         setIsGoogleLoading(false);
     }
   }
