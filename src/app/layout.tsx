@@ -35,13 +35,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Humanize AI Pro' }],
   creator: 'Humanize AI Pro',
   icons: {
-    icon: [
-        { url: '/favicon.ico?v=101', sizes: 'any', type: 'image/x-icon' },
-        { url: '/favicon-16x16.png?v=101', sizes: '16x16', type: 'image/png' },
-        { url: '/favicon-32x32.png?v=101', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [{ url: '/apple-touch-icon.png?v=101', sizes: '180x180' }],
-    shortcut: ['/apple-touch-icon.png']
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   alternates: {
     canonical: 'https://humanize-ai.ooguy.com',

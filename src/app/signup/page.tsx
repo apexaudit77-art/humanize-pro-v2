@@ -104,7 +104,7 @@ export default function SignupPage() {
     try {
         await signInWithPopup(authInstance, googleProvider);
         toast({ title: 'Account created successfully!' });
-        // The useEffect hook will now handle the redirection.
+        router.push('/en/humanize-ai');
     } catch (error: any) {
         console.error("Google Sign-In Error:", error);
         toast({
