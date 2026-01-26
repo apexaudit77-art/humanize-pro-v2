@@ -100,7 +100,7 @@ const Footer = () => (
         <Link href="/faq" className="hover:text-primary transition-colors">
           FAQ
         </Link>
-        <Link href="/sitemap" className="hover:text-primary transition-colors">
+        <Link href="/sitemap-overview" className="hover:text-primary transition-colors">
           Sitemap
         </Link>
       </div>

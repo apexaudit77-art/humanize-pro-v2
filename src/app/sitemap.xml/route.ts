@@ -20,7 +20,7 @@ async function generateSitemapItems(): Promise<MetadataRoute.Sitemap> {
     '/pricing',
     '/privacy',
     '/signup',
-    '/sitemap', // HTML sitemap page
+    '/sitemap-overview', // HTML sitemap page
     '/terms',
     '/tools/ai-pattern-remover',
   ].map((route) => ({
