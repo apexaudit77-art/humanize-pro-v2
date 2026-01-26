@@ -245,7 +245,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="article-formatter"
             className="min-h-screen transition-all duration-300"
           >
-            <ArticleFormatterTab />
+            <ArticleFormatterTab config={config.articleFormatterTab}/>
           </section>
         );
       case "document-analyzer":
@@ -254,7 +254,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="document-analyzer"
             className="min-h-screen transition-all duration-300"
           >
-            <DocumentAnalyzerTab />
+            <DocumentAnalyzerTab config={config.documentAnalyzerTab} />
           </section>
         );
       case "ai-detector":
@@ -322,7 +322,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="grammar-checker"
             className="min-h-screen transition-all duration-300"
           >
-            <GrammarCheckerTab />
+            <GrammarCheckerTab config={config.grammarCheckerTab} />
           </section>
         );
       case "citation-generator":
@@ -331,7 +331,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="citation-generator"
             className="min-h-screen transition-all duration-300"
           >
-            <CitationGeneratorTab />
+            <CitationGeneratorTab config={config.citationGeneratorTab} />
           </section>
         );
       case "ai-translator":
@@ -340,7 +340,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="ai-translator"
             className="min-h-screen transition-all duration-300"
           >
-            <AiTranslatorTab />
+            <AiTranslatorTab config={config.aiTranslatorTab} />
           </section>
         );
       case "social-media-expert":
@@ -349,7 +349,7 @@ export function Sidebar({ lang, dir, config }: { lang: any, dir: any, config: an
             id="social-media-expert"
             className="min-h-screen transition-all duration-300"
           >
-            <SocialMediaExpertTab />
+            <SocialMediaExpertTab config={config.socialMediaExpertTab} />
           </section>
         );
       default:

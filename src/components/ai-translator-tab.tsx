@@ -43,7 +43,19 @@ const languages = [
 
 const tones = ['Formal', 'Creative', 'Academic', 'Colloquial'];
 
-export function AiTranslatorTab() {
+interface AiTranslatorTabProps {
+  config: {
+    title: string;
+    description: string;
+    sourceLangPlaceholder: string;
+    sourceTextPlaceholder: string;
+    targetTextPlaceholder: string;
+    toneLabel: string;
+    translateButton: string;
+  };
+}
+
+export function AiTranslatorTab({ config }: AiTranslatorTabProps) {
   const [sourceLang, setSourceLang] = useState(languages[0]);
   const [targetLang, setTargetLang] = useState(languages[1]);
 
@@ -54,12 +66,10 @@ export function AiTranslatorTab() {
     >
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/50">
-          مترجم الذكاء الاصطناعي: ترجمة ذكية تتجاوز المعاني الحرفية.
+          {config.title}
         </h1>
         <p className="mx-auto mt-4 max-w-[800px] text-lg text-muted-foreground md:text-xl">
-          استخدم قوة الذكاء الاصطناعي للحصول على ترجمة دقيقة تفهم السياق
-          الثقافي واللغوي. ترجم نصوصك إلى أي لغة في العالم مع الحفاظ على النبرة
-          والأسلوب المناسب.
+          {config.description}
         </p>
       </div>
 
@@ -69,7 +79,7 @@ export function AiTranslatorTab() {
           <div className="flex flex-col gap-4">
             <Select value={sourceLang} onValueChange={setSourceLang} disabled>
               <SelectTrigger>
-                <SelectValue placeholder="Select Language" />
+                <SelectValue placeholder={config.sourceLangPlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 {languages.map((lang) => (
@@ -81,7 +91,7 @@ export function AiTranslatorTab() {
             </Select>
             <div className="relative flex-grow">
               <Textarea
-                placeholder="Enter text to translate..."
+                placeholder={config.sourceTextPlaceholder}
                 className="min-h-[250px] sm:min-h-[300px] resize-none bg-background/50 rounded-xl shadow-inner border-dashed"
                 disabled
               />
@@ -100,7 +110,7 @@ export function AiTranslatorTab() {
           <div className="flex flex-col gap-4">
             <Select value={targetLang} onValueChange={setTargetLang} disabled>
               <SelectTrigger>
-                <SelectValue placeholder="Select Language" />
+                <SelectValue placeholder={config.sourceLangPlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 {languages
@@ -114,7 +124,7 @@ export function AiTranslatorTab() {
             </Select>
             <div className="relative flex-grow">
               <Textarea
-                placeholder="Translation will appear here..."
+                placeholder={config.targetTextPlaceholder}
                 readOnly
                 className="min-h-[250px] sm:min-h-[300px] resize-none bg-muted/40 rounded-xl shadow-inner border-dashed"
                 disabled
@@ -138,7 +148,7 @@ export function AiTranslatorTab() {
               <ArrowRightLeft className="h-5 w-5" />
             </Button>
             <div className="flex items-center gap-2">
-              <Label htmlFor="tone-select">Tone:</Label>
+              <Label htmlFor="tone-select">{config.toneLabel}</Label>
               <Select defaultValue={tones[0]} disabled>
                 <SelectTrigger
                   id="tone-select"
@@ -163,7 +173,7 @@ export function AiTranslatorTab() {
           >
             <span className="absolute w-full h-full brand-mesh -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient" />
             <Languages className="mr-2 h-5 w-5" />
-            Translate (Coming Soon)
+            {config.translateButton}
           </Button>
         </div>
       </Card>

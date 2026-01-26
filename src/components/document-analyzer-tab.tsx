@@ -15,7 +15,31 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 
-export function DocumentAnalyzerTab() {
+interface DocumentAnalyzerTabProps {
+  config: {
+    title: string;
+    description: string;
+    uploadTitle: string;
+    uploadDescription: string;
+    uploadingText: string;
+    uploadSuccessTitle: string;
+    uploadSuccessDescription: string;
+    actionToArticle: string;
+    actionSummarize: string;
+    actionTranslate: string;
+    actionSoon: string;
+    chatTitle: string;
+    chatPlaceholder: string;
+    chatInputPlaceholder: string;
+    chatSendButton: string;
+    mindMapTitle: string;
+    mindMapButton: string;
+    mindMapButtonSoon: string;
+    mindMapPlaceholder: string;
+  };
+}
+
+export function DocumentAnalyzerTab({ config }: DocumentAnalyzerTabProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -74,10 +98,10 @@ export function DocumentAnalyzerTab() {
     <section id="document-analyzer" className="flex flex-col items-center justify-center py-8 md:py-12 w-full">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/50">
-          محلل المستندات الشامل
+          {config.title}
         </h1>
         <p className="mx-auto mt-4 max-w-[800px] text-lg text-muted-foreground md:text-xl">
-          أداة واحدة تغنيك عن عشرات المواقع. ارفع ملف الـ PDF الخاص بك الآن للدردشة معه، تلخيصه، ترجمته، أو تحويله إلى خريطة ذهنية مبتكرة في ثوانٍ.
+          {config.description}
         </p>
       </div>
 
@@ -99,10 +123,10 @@ export function DocumentAnalyzerTab() {
                 <UploadCloud className="h-16 w-16 text-primary animate-pulse" />
               </div>
               <p className="text-xl font-semibold text-foreground">
-                اسحب وأفلت ملف PDF هنا أو انقر للاختيار
+                {config.uploadTitle}
               </p>
               <p className="text-muted-foreground">
-                (بحد أقصى 10 ميجابايت)
+                {config.uploadDescription}
               </p>
             </div>
           </CardContent>
@@ -111,7 +135,7 @@ export function DocumentAnalyzerTab() {
         <div className="w-full max-w-5xl space-y-8">
           {isUploading && (
             <div className="w-full max-w-md mx-auto space-y-3 text-center">
-              <p className="font-semibold text-lg">جاري رفع: {fileName}</p>
+              <p className="font-semibold text-lg">{config.uploadingText.replace('{fileName}', fileName)}</p>
               <Progress value={uploadProgress} className="w-full" />
               <p className="text-sm text-muted-foreground">{uploadProgress}%</p>
             </div>
@@ -120,60 +144,60 @@ export function DocumentAnalyzerTab() {
           {!isUploading && (
             <div className="space-y-8">
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold tracking-tight">تم رفع المستند بنجاح!</h2>
-                    <p className="text-muted-foreground mt-2">اختر الإجراء الذي تريد تطبيقه على: <span className="font-semibold text-primary">{fileName}</span></p>
+                    <h2 className="text-2xl font-bold tracking-tight">{config.uploadSuccessTitle}</h2>
+                    <p className="text-muted-foreground mt-2">{config.uploadSuccessDescription.replace('{fileName}', fileName)}</p>
                 </div>
 
               {/* Action Dashboard */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Button variant="outline" size="lg" disabled className="h-auto py-4 flex flex-col gap-2">
                     <FileText className="w-8 h-8" />
-                    <span className="font-semibold">تحويل إلى مقال</span>
-                    <span className="text-xs font-normal text-muted-foreground">قريباً</span>
+                    <span className="font-semibold">{config.actionToArticle}</span>
+                    <span className="text-xs font-normal text-muted-foreground">{config.actionSoon}</span>
                 </Button>
                 <Button variant="outline" size="lg" disabled className="h-auto py-4 flex flex-col gap-2">
                     <BrainCircuit className="w-8 h-8" />
-                    <span className="font-semibold">تلخيص ذكي</span>
-                     <span className="text-xs font-normal text-muted-foreground">قريباً</span>
+                    <span className="font-semibold">{config.actionSummarize}</span>
+                     <span className="text-xs font-normal text-muted-foreground">{config.actionSoon}</span>
                 </Button>
                  <Button variant="outline" size="lg" disabled className="h-auto py-4 flex flex-col gap-2">
                     <Languages className="w-8 h-8" />
-                    <span className="font-semibold">ترجمة فورية</span>
-                     <span className="text-xs font-normal text-muted-foreground">قريباً</span>
+                    <span className="font-semibold">{config.actionTranslate}</span>
+                     <span className="text-xs font-normal text-muted-foreground">{config.actionSoon}</span>
                 </Button>
               </div>
 
                <div className="flex flex-col lg:flex-row gap-8">
                 {/* Chat with PDF */}
                 <AnalysisResultCard 
-                    title="الدردشة مع المستند"
+                    title={config.chatTitle}
                     ctaButtons={
-                        <div className="text-xs font-bold text-primary bg-primary/20 px-2 py-1 rounded-md">قريباً</div>
+                        <div className="text-xs font-bold text-primary bg-primary/20 px-2 py-1 rounded-md">{config.actionSoon}</div>
                     }
                 >
                     <div className="space-y-4">
                         <div className="min-h-[200px] flex-grow rounded-md border border-dashed border-border p-4 bg-muted/30 text-muted-foreground flex items-center justify-center">
-                            ستظهر محادثتك هنا
+                            {config.chatPlaceholder}
                         </div>
                         <div className="flex gap-2">
-                            <input type="text" placeholder="اطرح سؤالاً عن محتوى الملف..." className="flex-grow bg-background/50 rounded-md px-3 border border-input" disabled />
-                            <Button disabled>إرسال</Button>
+                            <input type="text" placeholder={config.chatInputPlaceholder} className="flex-grow bg-background/50 rounded-md px-3 border border-input" disabled />
+                            <Button disabled>{config.chatSendButton}</Button>
                         </div>
                     </div>
                 </AnalysisResultCard>
 
                 {/* Mind Map */}
                  <AnalysisResultCard 
-                    title="توليد خريطة ذهنية"
+                    title={config.mindMapTitle}
                      ctaButtons={
                          <Button variant="outline" size="sm" disabled>
                             <BrainCircuit className="w-4 h-4 mr-2" />
-                            توليد (قريباً)
+                            {config.mindMapButtonSoon}
                         </Button>
                     }
                 >
                     <div className="min-h-[250px] flex items-center justify-center rounded-md border border-dashed border-border bg-muted/30">
-                        <p className="text-muted-foreground">ستظهر الخريطة الذهنية هنا</p>
+                        <p className="text-muted-foreground">{config.mindMapPlaceholder}</p>
                     </div>
                 </AnalysisResultCard>
                </div>

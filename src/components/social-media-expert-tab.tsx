@@ -34,7 +34,7 @@ const platforms = [
   { name: 'Facebook', icon: Facebook },
 ];
 
-const OutputCard = ({ title, content, onCopy, onGenerateMore }: { title: string, content: string[], onCopy: () => void, onGenerateMore: () => void }) => {
+const OutputCard = ({ title, content, onCopy, onGenerateMore, placeholder }: { title: string, content: string[], onCopy: () => void, onGenerateMore: () => void, placeholder: string }) => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {
         onCopy();
@@ -57,23 +57,45 @@ const OutputCard = ({ title, content, onCopy, onGenerateMore }: { title: string,
             <div className="space-y-2">
                 {content.length > 0 ? content.map((item, index) => (
                     <p key={index} className="text-sm text-muted-foreground bg-background/50 p-2 rounded-md">{item}</p>
-                )) : <p className="text-sm text-muted-foreground">سيتم إنشاء المحتوى هنا...</p>}
+                )) : <p className="text-sm text-muted-foreground">{placeholder}</p>}
             </div>
         </div>
     );
 }
 
-export function SocialMediaExpertTab() {
+interface SocialMediaExpertTabProps {
+  config: {
+    title: string;
+    description: string;
+    card1Title: string;
+    platformLabel: string;
+    descriptionLabel: string;
+    descriptionPlaceholder: string;
+    keywordsLabel: string;
+    keywordsPlaceholder: string;
+    generateButtonSoon: string;
+    card2Title: string;
+    card2Description: string;
+    copyAllButton: string;
+    outputTitles: string;
+    outputDescription: string;
+    outputHashtags: string;
+    outputTags: string;
+    outputPlaceholder: string;
+  };
+}
+
+export function SocialMediaExpertTab({ config }: SocialMediaExpertTabProps) {
   const [selectedPlatform, setSelectedPlatform] = useState('YouTube');
 
   return (
     <section id="social-media-expert" className="flex flex-col items-center justify-center py-8 md:py-12 w-full">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/50">
-          مساعدك الذكي لتصدر تريند السوشيال ميديا
+          {config.title}
         </h1>
         <p className="mx-auto mt-4 max-w-[800px] text-lg text-muted-foreground md:text-xl">
-          لا تشغل بالك بالبحث عن الهاشتاقات أو كتابة الوصف. اختر منصتك، ضع فكرتك، واحصل فوراً على عناوين جذابة وهاشتاقات وكلمات دلالية مجهزة بالذكاء الاصطناعي لزيادة مشاهداتك.
+          {config.description}
         </p>
       </div>
 
@@ -81,11 +103,11 @@ export function SocialMediaExpertTab() {
         {/* Input Card */}
         <Card className="lg:col-span-1 bg-card/60 backdrop-blur-xl border-border/50 shadow-lg">
           <CardHeader>
-            <CardTitle>1. اختر المنصة والمحتوى</CardTitle>
+            <CardTitle>{config.card1Title}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <Label>اختر المنصة</Label>
+              <Label>{config.platformLabel}</Label>
               <ToggleGroup type="single" value={selectedPlatform} onValueChange={(value) => value && setSelectedPlatform(value)} className="grid grid-cols-3 sm:grid-cols-5 gap-2 mt-2" disabled>
                 {platforms.map(({ name, icon: Icon }) => (
                   <ToggleGroupItem key={name} value={name} aria-label={`Select ${name}`} className="h-16 flex-col gap-2">
@@ -96,19 +118,19 @@ export function SocialMediaExpertTab() {
               </ToggleGroup>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="content-description">وصف المحتوى</Label>
+              <Label htmlFor="content-description">{config.descriptionLabel}</Label>
               <Textarea
                 id="content-description"
-                placeholder="مثال: فيديو عن أفضل 5 طرق لزيادة الإنتاجية في العمل"
+                placeholder={config.descriptionPlaceholder}
                 className="min-h-[150px] bg-background/50 rounded-xl shadow-inner border-dashed"
                 disabled
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="keywords">كلمات مفتاحية (اختياري)</Label>
+              <Label htmlFor="keywords">{config.keywordsLabel}</Label>
               <Input
                 id="keywords"
-                placeholder="إنتاجية, عمل, نصائح"
+                placeholder={config.keywordsPlaceholder}
                 disabled
               />
             </div>
@@ -118,7 +140,7 @@ export function SocialMediaExpertTab() {
             >
               <span className="absolute w-full h-full brand-mesh -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient" />
               <Sparkles className="mr-2 h-5 w-5" />
-              توليد المحتوى (قريباً)
+              {config.generateButtonSoon}
             </Button>
           </CardContent>
         </Card>
@@ -127,19 +149,19 @@ export function SocialMediaExpertTab() {
         <Card className="lg:col-span-2 bg-card/60 backdrop-blur-xl border-border/50 shadow-lg">
           <CardHeader className="flex flex-row justify-between items-center">
             <div>
-                <CardTitle>2. المحتوى المُحسَّن لخوارزمية <span className="text-primary">{selectedPlatform}</span></CardTitle>
+                <CardTitle>{config.card2Title.replace('{platform}', selectedPlatform)}</CardTitle>
                 <CardDescription>
-                هذه الاقتراحات تم توليدها خصيصاً لزيادة التفاعل.
+                {config.card2Description}
                 </CardDescription>
             </div>
-            <Button variant="outline" disabled><Copy className="mr-2 h-4 w-4"/>نسخ الكل</Button>
+            <Button variant="outline" disabled><Copy className="mr-2 h-4 w-4"/>{config.copyAllButton}</Button>
           </CardHeader>
           <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <OutputCard title="عناوين جذابة (Titles)" content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} />
-                <OutputCard title="وصف محسن (Description)" content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} />
-                <OutputCard title="هاشتاقات رائجة (Hashtags)" content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} />
-                <OutputCard title="علامات (Tags)" content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} />
+                <OutputCard title={config.outputTitles} content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} placeholder={config.outputPlaceholder} />
+                <OutputCard title={config.outputDescription} content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} placeholder={config.outputPlaceholder} />
+                <OutputCard title={config.outputHashtags} content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} placeholder={config.outputPlaceholder} />
+                <OutputCard title={config.outputTags} content={[]} onCopy={()=>{}} onGenerateMore={()=>{}} placeholder={config.outputPlaceholder} />
               </div>
           </CardContent>
         </Card>
