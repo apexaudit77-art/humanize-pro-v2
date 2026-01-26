@@ -42,10 +42,18 @@ export const metadata: Metadata = {
     canonical: 'https://humanize-ai.ooguy.com',
   },
   openGraph: {
-    title: 'Humanize AI Pro - اجعل نصوصك بشرية وتخطى الكواشف',
-    description: 'الأداة رقم #1 لتحويل محتوى AI إلى محتوى بشري إبداعي.',
+    title: 'Humanize AI | منصتك الشاملة لأدوات الذكاء الاصطناعي',
+    description: '11 أداة احترافية لتحويل النصوص، كتابة المقالات، وفحص الانتحال في مكان واحد.',
     url: 'https://humanize-ai.ooguy.com',
     siteName: 'Humanize AI Pro',
+    images: [
+      {
+        url: '/android-chrome-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'Humanize AI Pro Logo',
+      },
+    ],
     locale: 'ar_SA',
     type: 'website',
   },
