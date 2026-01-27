@@ -46,7 +46,14 @@ export async function GET() {
         return `
     <url>
         <loc>${item.url}</loc>
-        <lastmod>${new Date(item.lastModified || new Date()).toISOString()}</lastmod>
+        <lastmod>${(() => {
+          try {
+            const date = item.lastModified ? new Date(item.lastModified) : new Date();
+            return isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString();
+          } catch (e) {
+            return new Date().toISOString();
+          }
+        })()}</lastmod>
     </url>
     `;
       })
