@@ -46,7 +46,7 @@ export async function GET() {
         return `
     <url>
         <loc>${item.url}</loc>
-        <lastmod>${item.lastModified?.toISOString()}</lastmod>
+        <lastmod>${new Date(item.lastModified || new Date()).toISOString()}</lastmod>
     </url>
     `;
       })
