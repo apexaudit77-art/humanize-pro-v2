@@ -1,11 +1,7 @@
 {
-  "name": "HumanizeAI Pro",
+  "name": "Humanize AI Pro",
   "short_name": "HumanizeAI",
-  "theme_color": "#C026D3",
-  "background_color": "#020617",
-  "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  "description": "The ultimate AI suite for writers: Humanizer, SEO tools, Detectors, and more.",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -17,5 +13,9 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "theme_color": "#020617",
+  "background_color": "#020617",
+  "display": "standalone",
+  "start_url": "/"
 }

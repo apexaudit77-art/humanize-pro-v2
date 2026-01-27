@@ -35,27 +35,33 @@ export const metadata: Metadata = {
   authors: [{ name: 'Humanize AI Pro' }],
   creator: 'Humanize AI Pro',
   icons: {
-    icon: '/favicon.ico?v=104',
-    apple: '/apple-touch-icon.png?v=104',
+    icon: '/favicon.ico?v=105',
+    apple: '/apple-touch-icon.png?v=105',
   },
   alternates: {
     canonical: 'https://humanize-ai.ooguy.com',
   },
   openGraph: {
-    title: 'Humanize AI | منصتك الشاملة لأدوات الذكاء الاصطناعي',
-    description: '11 أداة احترافية لتحويل النصوص، كتابة المقالات، وفحص الانتحال في مكان واحد.',
+    title: 'Humanize AI - 11 Professional AI Tools',
+    description: 'The ultimate AI suite for writers: Humanizer, SEO tools, Detectors, and more.',
     url: 'https://humanize-ai.ooguy.com',
     siteName: 'Humanize AI Pro',
     images: [
       {
-        url: '/android-chrome-512x512.png',
-        width: 512,
-        height: 512,
-        alt: 'Humanize AI Pro Logo',
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Humanize AI Pro Tools',
       },
     ],
-    locale: 'ar_SA',
+    locale: 'en_US',
     type: 'website',
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: 'Humanize AI - 11 Professional AI Tools',
+    description: 'The ultimate AI suite for writers: Humanizer, SEO tools, Detectors, and more.',
+    images: ['/og-image.png'],
   },
   verification: {
     google: 'fY3wxYACZTx5QkIdxdtu91H32nLFmCVeqwFWc0-jwBc',
