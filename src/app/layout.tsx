@@ -21,7 +21,6 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://humanize-ai.ooguy.com'),
-  manifest: '/site.webmanifest',
   title: {
     default: 'Humanize AI Pro | محول نص الذكاء الاصطناعي إلى نص بشري 100%',
     template: '%s | Humanize AI Pro'
@@ -35,15 +34,21 @@ export const metadata: Metadata = {
   authors: [{ name: 'Humanize AI Pro' }],
   creator: 'Humanize AI Pro',
   icons: {
-    icon: '/favicon.ico?v=105',
-    apple: '/apple-touch-icon.png?v=105',
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
+  manifest: '/site.webmanifest',
   alternates: {
     canonical: 'https://humanize-ai.ooguy.com',
   },
   openGraph: {
-    title: 'Humanize AI - 11 Professional AI Tools',
-    description: 'The ultimate AI suite for writers: Humanizer, SEO tools, Detectors, and more.',
+    title: 'Humanize AI | منصتك الشاملة لأدوات الذكاء الاصطناعي',
+    description: '11 أداة احترافية لتحويل النصوص، كتابة المقالات، وفحص الانتحال في مكان واحد.',
     url: 'https://humanize-ai.ooguy.com',
     siteName: 'Humanize AI Pro',
     images: [
