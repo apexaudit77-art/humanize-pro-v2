@@ -34,12 +34,11 @@ export default async function Blog() {
                  <div className="md:col-span-1">
                     <Link href={`/blog/${post.slug}`}>
                         <Image 
-                            src={`https://picsum.photos/seed/${post.slug}/600/400`}
+                            src={`https://source.unsplash.com/800x600/?artificial-intelligence,technology&sig=${index}`}
                             alt={post.title}
-                            width={600}
-                            height={400}
-                            className="rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
-                            data-ai-hint="artificial intelligence abstract"
+                            width={800}
+                            height={600}
+                            className="object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
                         />
                     </Link>
                  </div>

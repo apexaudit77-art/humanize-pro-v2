@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 
-export default async function Page(props: { params: Promise<{ slug: string }> }) {
-  const { slug } = await props.params;
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
