@@ -98,13 +98,18 @@ export default {
         'pulse-glow': {
           '0%, 100%': { boxShadow: '0 0 15px hsl(var(--accent) / 0.4), 0 0 30px hsl(var(--primary) / 0.3)' },
           '50%': { boxShadow: '0 0 25px hsl(var(--accent) / 0.6), 0 0 45px hsl(var(--primary) / 0.4)' },
-        }
+        },
+        'border-pulse': {
+            '0%, 100%': { borderColor: 'hsl(var(--border) / 0.5)' },
+            '50%': { borderColor: 'hsl(var(--primary))' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'gradient': 'gradient 3s ease infinite',
         'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
+        'border-pulse': 'border-pulse 2s ease-in-out infinite',
       },
       transitionProperty: {
         'grid-template-columns': 'grid-template-columns',

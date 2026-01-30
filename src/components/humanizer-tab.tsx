@@ -26,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "./ui/skeleton";
 import { useUser } from "@/firebase";
+import { cn } from "@/lib/utils";
 
 const tones = ["Professional", "Academic", "Casual", "Creative", "Friendly", "Formal"];
 
@@ -144,7 +145,10 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {/* Input Card */}
-              <div className="w-full bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg p-1 rounded-xl relative transition-all duration-300 hover:backdrop-blur-md">
+              <div className={cn(
+                "w-full bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg p-1 rounded-xl relative transition-all duration-300 hover:backdrop-blur-md",
+                isLoading && "animate-border-pulse"
+              )}>
                 <div className="p-4 border-b border-white/10 flex justify-between items-center">
                     <h3 className="font-headline text-lg text-foreground/80">{config.yourText}</h3>
                     <div className="flex items-center gap-2">
@@ -175,7 +179,10 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
               </div>
 
               {/* Output Card */}
-               <div className="w-full bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg p-1 rounded-xl relative transition-all duration-300 hover:backdrop-blur-md">
+               <div className={cn(
+                "w-full bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg p-1 rounded-xl relative transition-all duration-300 hover:backdrop-blur-md",
+                isLoading && "animate-border-pulse"
+              )}>
                 <div className="p-4 border-b border-white/10 flex justify-between items-center">
                     <h3 className="font-headline text-lg text-foreground/80 flex items-center gap-2">
                         <Sparkles className="h-5 w-5 text-primary" />
@@ -199,7 +206,7 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
                       <Skeleton className="h-5 w-2/4" />
                     </div>
                   ) : (
-                    <div className="prose prose-lg dark:prose-invert max-w-none text-foreground min-h-[350px] rounded-md">
+                    <div className="prose prose-lg dark:prose-invert max-w-none text-foreground min-h-[350px] rounded-md animate-in fade-in duration-500">
                       {result || config.outputPlaceholder}
                     </div>
                   )}
