@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -65,7 +65,27 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  // Load text from localStorage on initial render
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedText = localStorage.getItem('humanizerText');
+      if (savedText) {
+        form.setValue('text', savedText);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Save text to localStorage on change
+  const textValue = form.watch('text');
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('humanizerText', textValue);
+    }
+  }, [textValue]);
+
+
+  const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
     if (!user) {
         setShowLoginModal(true);
         return;
@@ -84,19 +104,22 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
         description: response.error || "Something went wrong.",
       });
     }
-  }
+  }, [user, setShowLoginModal, toast]);
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
+    if (!result) return;
     navigator.clipboard.writeText(result);
     setCopied(true);
     toast({ title: "Copied to clipboard!" });
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, [result, toast]);
   
-  const handlePaste = async () => {
+  const handlePaste = useCallback(async () => {
     try {
-      const text = await navigator.clipboard.readText();
-      form.setValue("text", text);
+      if (typeof window !== 'undefined' && navigator.clipboard) {
+        const text = await navigator.clipboard.readText();
+        form.setValue("text", text);
+      }
     } catch (err) {
       toast({
         variant: "destructive",
@@ -104,12 +127,15 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
         description: "Could not read from clipboard. Please paste manually.",
       });
     }
-  };
+  }, [form, toast]);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     form.setValue("text", "");
     setResult("");
-  };
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('humanizerText');
+    }
+  }, [form]);
 
   return (
     <div className="flex justify-center w-full py-6">
@@ -156,7 +182,7 @@ export function HumanizerTab({ config, setShowLoginModal }: HumanizerTabProps) {
                         {config.outputTitle}
                     </h3>
                     {result && !isLoading && (
-                        <Button variant="ghost" size="icon" onClick={handleCopy}>
+                        <Button variant="ghost" size="icon" type="button" onClick={handleCopy}>
                             {copied ? <Clipboard className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
                         </Button>
                     )}
