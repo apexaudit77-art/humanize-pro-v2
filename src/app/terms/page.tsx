@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,7 +10,8 @@ export default function TermsOfService() {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
-    setCurrentDate(new Date().toLocaleDateString());
+    // Using a specific locale format for consistency and to avoid hydration errors.
+    setCurrentDate(new Date().toLocaleDateString('en-CA')); // YYYY-MM-DD format
   }, []);
 
   return (
@@ -30,8 +32,8 @@ export default function TermsOfService() {
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
                         Terms of Service
                     </h1>
-                     <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
-                        {currentDate ? `Last updated: ${currentDate}` : <span className="h-5 w-32 inline-block"></span>}
+                     <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl h-7">
+                        {currentDate ? `Last updated: ${currentDate}` : <span className="h-5 w-48 inline-block bg-muted/50 rounded animate-pulse"></span>}
                     </p>
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none">
