@@ -4,6 +4,7 @@ import { getPosts } from "@/lib/posts";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { format } from 'date-fns';
 
 export default async function Blog() {
   const posts = await getPosts();
@@ -45,7 +46,7 @@ export default async function Blog() {
                  <div className="md:col-span-2">
                     <div className="mb-2">
                       <p className="text-sm text-muted-foreground">
-                        {post.date && !isNaN(new Date(post.date).getTime()) ? new Date(post.date).toLocaleDateString() : ''}
+                        {post.date && !isNaN(new Date(post.date).getTime()) ? format(new Date(post.date), 'MMMM d, yyyy') : ''}
                       </p>
                     </div>
                     <h3 className="text-2xl font-bold font-headline mb-2">

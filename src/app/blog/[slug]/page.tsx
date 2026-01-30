@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import Script from 'next/script';
+import { format } from 'date-fns';
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -16,16 +17,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  const swgConfig = {
-    type: "NewsArticle",
-    isPartOfType: ["Product"],
-    isPartOfProductId: "CAow2IHFDA:openaccess",
-    clientOptions: { theme: "light", lang: "en" },
-  };
-
   const swgInitScript = `
     (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-      basicSubscriptions.init(${JSON.stringify(swgConfig)});
+      basicSubscriptions.init({
+        "type": "NewsArticle",
+        "isPartOfType": ["Product"],
+        "isPartOfProductId": "CAow2IHFDA:openaccess",
+        "clientOptions": { "theme": "light", "lang": "en" }
+      });
     });
   `;
 
@@ -63,7 +62,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                               {post.title}
                           </h1>
                           <p className="mt-4 text-center text-muted-foreground text-lg">
-                              {isValidDate ? `Published on ${new Date(post.date).toLocaleDateString()}`: ''}
+                              {isValidDate ? `Published on ${format(new Date(post.date), 'MMMM d, yyyy')}`: ''}
                           </p>
                       </header>
                       <div className="prose prose-lg dark:prose-invert max-w-none mx-auto">
