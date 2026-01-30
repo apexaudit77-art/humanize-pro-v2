@@ -16,6 +16,19 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const swgConfig = {
+    type: "NewsArticle",
+    isPartOfType: ["Product"],
+    isPartOfProductId: "CAow2IHFDA:openaccess",
+    clientOptions: { theme: "light", lang: "en" },
+  };
+
+  const swgInitScript = `
+    (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+      basicSubscriptions.init(${JSON.stringify(swgConfig)});
+    });
+  `;
+
   return (
     <>
       <Script
@@ -24,16 +37,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         strategy="afterInteractive"
       />
       <Script id="swg-init" strategy="afterInteractive">
-        {`
-          (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-            basicSubscriptions.init({
-              type: "NewsArticle",
-              isPartOfType: ["Product"],
-              isPartOfProductId: "CAow2IHFDA:openaccess",
-              clientOptions: { theme: "light", lang: "en" },
-            });
-          });
-        `}
+        {swgInitScript}
       </Script>
       <div className="flex min-h-screen w-full flex-col items-center bg-transparent text-foreground">
           <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,7 +59,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                               {post.title}
                           </h1>
                           <p className="mt-4 text-center text-muted-foreground text-lg">
-                              Published on {new Date(post.date).toLocaleDateString()}
+                              {post.date ? `Published on ${new Date(post.date).toLocaleDateString()}`: ''}
                           </p>
                       </header>
                       <div className="prose prose-lg dark:prose-invert max-w-none mx-auto">
