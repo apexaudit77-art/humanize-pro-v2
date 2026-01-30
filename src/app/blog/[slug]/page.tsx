@@ -17,33 +17,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  const swgInitScript = `
-    if (typeof self !== 'undefined') {
-      (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-        basicSubscriptions.init({
-          "type": "NewsArticle",
-          "isPartOfType": ["Product"],
-          "isPartOfProductId": "CAow2IHFDA:openaccess",
-          "clientOptions": { "theme": "light", "lang": "en" }
-        });
-      });
-    }
-  `;
-
   const isValidDate = post.date && !isNaN(new Date(post.date).getTime());
 
   return (
     <>
-      <Script
-        id="swg-script"
-        src="https://news.google.com/swg/js/v1/swg-basic.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="swg-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: swgInitScript }}
-      />
       <div className="flex min-h-screen w-full flex-col items-center bg-transparent text-foreground">
           <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
               <header className="flex w-full items-center justify-between py-4 md:py-6 border-b border-border/50">
