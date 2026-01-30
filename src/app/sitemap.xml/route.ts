@@ -5,10 +5,13 @@ async function generateSitemapItems(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://humanize-ai.ooguy.com';
 
   const posts = await getPosts();
-  const postUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-  }));
+  const postUrls = posts.map((post) => {
+    const date = post.date ? new Date(post.date) : new Date();
+    return {
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: !isNaN(date.getTime()) ? date : new Date(),
+    }
+  });
 
   const staticRoutes = [
     '', // Home
@@ -43,17 +46,11 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${items
       .map((item) => {
+        const lastModString = (item.lastModified ?? new Date()).toISOString();
         return `
     <url>
         <loc>${item.url}</loc>
-        <lastmod>${(() => {
-          try {
-            const date = item.lastModified ? new Date(item.lastModified) : new Date();
-            return isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString();
-          } catch (e) {
-            return new Date().toISOString();
-          }
-        })()}</lastmod>
+        <lastmod>${lastModString}</lastmod>
     </url>
     `;
       })
