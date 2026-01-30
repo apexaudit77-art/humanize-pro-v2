@@ -29,12 +29,13 @@ export async function getPosts(): Promise<Post[]> {
             try {
                 const fileContents = fs.readFileSync(fullPath, 'utf8');
                 const matterResult = matter(fileContents);
+                const data = matterResult.data || {};
 
                 return {
                     slug,
-                    title: matterResult.data.title || 'Untitled Post',
-                    date: matterResult.data.date || new Date().toISOString(),
-                    excerpt: matterResult.data.excerpt || '',
+                    title: data.title || 'Untitled Post',
+                    date: data.date || new Date().toISOString(),
+                    excerpt: data.excerpt || '',
                     content: matterResult.content || '',
                 };
             } catch (mapError) {
@@ -73,12 +74,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     }
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const matterResult = matter(fileContents);
+    const data = matterResult.data || {};
 
     return {
       slug,
-      title: matterResult.data.title || 'Untitled Post',
-      date: matterResult.data.date || new Date().toISOString(),
-      excerpt: matterResult.data.excerpt || '',
+      title: data.title || 'Untitled Post',
+      date: data.date || new Date().toISOString(),
+      excerpt: data.excerpt || '',
       content: matterResult.content || '',
     };
   } catch (error) {
