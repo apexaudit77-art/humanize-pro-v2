@@ -1,9 +1,17 @@
+'use client';
 
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function PrivacyPage() {
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString());
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-transparent text-foreground">
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,7 +31,7 @@ export default function PrivacyPage() {
                         Privacy Policy
                     </h1>
                     <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground md:text-xl">
-                        Last updated: {new Date().toLocaleDateString()}
+                        {currentDate ? `Last updated: ${currentDate}` : <span className="h-5 w-32 inline-block"></span>}
                     </p>
                 </div>
                 <div className="prose prose-lg dark:prose-invert max-w-none">
