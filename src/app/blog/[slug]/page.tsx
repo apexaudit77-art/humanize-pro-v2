@@ -18,14 +18,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   const swgInitScript = `
-    (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-      basicSubscriptions.init({
-        "type": "NewsArticle",
-        "isPartOfType": ["Product"],
-        "isPartOfProductId": "CAow2IHFDA:openaccess",
-        "clientOptions": { "theme": "light", "lang": "en" }
+    if (typeof self !== 'undefined') {
+      (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+        basicSubscriptions.init({
+          "type": "NewsArticle",
+          "isPartOfType": ["Product"],
+          "isPartOfProductId": "CAow2IHFDA:openaccess",
+          "clientOptions": { "theme": "light", "lang": "en" }
+        });
       });
-    });
+    }
   `;
 
   const isValidDate = post.date && !isNaN(new Date(post.date).getTime());

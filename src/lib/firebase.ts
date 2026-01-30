@@ -12,33 +12,27 @@ const firebaseConfig = {
     appId: "1:1039388373906:web:81753e053e420d501e474b" 
 };
 
-let app: FirebaseApp | null;
-let auth: Auth | null;
-let firestore: Firestore | null;
+let app: FirebaseApp | null = null;
+let authInstance: Auth | null = null;
+let firestoreInstance: Firestore | null = null;
 
 try {
   if (firebaseConfig.apiKey) {
     app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    firestore = getFirestore(app);
+    authInstance = getAuth(app);
+    firestoreInstance = getFirestore(app);
   } else {
-    app = null;
-    auth = null;
-    firestore = null;
     if (typeof window === 'undefined') {
       console.warn('Firebase API key is missing, Firebase features will be disabled on the server.');
     }
   }
 } catch (e) {
     console.error("Firebase initialization failed:", e);
-    app = null;
-    auth = null;
-    firestore = null;
 }
 
 export const firebaseApp: FirebaseApp | null = app;
-export const auth: Auth | null = auth; 
-export const firestore: Firestore | null = firestore;
+export const auth: Auth | null = authInstance; 
+export const firestore: Firestore | null = firestoreInstance;
 export const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({ 
