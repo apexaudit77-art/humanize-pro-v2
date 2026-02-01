@@ -1,28 +1,66 @@
-// استيراد المكونات اللازمة
+import SidebarClient from '@/components/ui/sidebar-client';
+import ar from '@/lib/i18n/ar.json';
+import en from '@/lib/i18n/en.json';
+import es from '@/lib/i18n/es.json';
+import { notFound } from 'next/navigation';
 import Script from 'next/script';
+import type { Metadata } from 'next';
 
-// تعريف النوع ليتوافق 100% مع Next.js 15
+const locales: Record<string, any> = { ar, en, es };
+
 interface PageProps {
-  params: Promise<{ lang: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { lang: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Page(props: PageProps) {
-  // انتظار الـ params والـ searchParams (إلزامي في Next.js 15)
-  const params = await props.params;
-  const searchParams = await props.searchParams;
-  
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+    const lang = params.lang;
+    const config = locales[lang] || en;
+    
+    return {
+        title: config.metadata?.title || 'Humanize AI Tools',
+        description: config.metadata?.description || 'A suite of AI tools to humanize text.',
+    };
+}
+
+export default async function Page({ params }: PageProps) {
   const lang = params.lang;
+  const config = locales[lang];
+
+  if (!config) {
+    notFound();
+  }
+
+  const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
   return (
     <>
-      {/* كود صفحتك هنا */}
-      <h1>Humanize AI - {lang}</h1>
-      
-      {/* تأكد من استخدام مكون Script الصحيح لمزامنة جوجل */}
-      <Script id="google-sync" strategy="afterInteractive">
-        {`console.log('Google Sync Active');`}
-      </Script>
+      <SidebarClient lang={lang} dir={dir} config={config} />
+       <Script
+        id="reader-revenue-manager-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+            __html: `
+            (self.SWG_BASIC = self.SWG_BASIC || []).push(basicSubscriptions => {
+                basicSubscriptions.init({
+                  type: "NewsArticle",
+                  isAccessibleForFree: true,
+                  isPartOfType: ["Product"],
+                  isPartOfProductId: "CAowqaUKEwiS04n3p5WGAxXZ37QBHQoMDqg:openaccess",
+                  autoPromptType: "contribution",
+                  clientOptions: {
+                    lang: "${lang}",
+                  },
+                });
+              });
+            `,
+        }}
+       />
+       <Script src="https://news.google.com/swg/js/v1/swg-basic.js" strategy="afterInteractive" async />
     </>
   );
+}
+
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'ar' }, { lang: 'es' }];
 }
