@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
   const lang = params.lang;
   const config = locales[lang];
 
