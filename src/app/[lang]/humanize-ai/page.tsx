@@ -662,7 +662,11 @@ const pageConfig = {
   },
 };
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+type MetadataProps = {
+  params: { lang: string };
+};
+
+export function generateMetadata({ params }: MetadataProps): Metadata {
   const { lang } = params;
   const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
   
@@ -706,7 +710,11 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-export default async function Page({ params }: { params: { lang: string } }) {
+type PageProps = {
+  params: { lang: string };
+};
+
+export default function Page({ params }: PageProps) {
   const { lang } = params;
   const config = pageConfig[lang as keyof typeof pageConfig] || pageConfig.en;
 

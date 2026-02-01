@@ -6,10 +6,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
-import Script from 'next/script';
 import { format } from 'date-fns';
 
-export default async function Page({ params }: { params: { slug: string } }) {
+type PageProps = {
+  params: { slug: string };
+};
+
+export default async function Page({ params }: PageProps) {
   const { slug } = params;
   const post = await getPostBySlug(slug);
 
