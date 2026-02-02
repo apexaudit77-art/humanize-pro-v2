@@ -8,8 +8,8 @@ import type { Metadata } from 'next';
 
 const locales: Record<string, any> = { ar, en, es };
 
-export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-    const { lang } = await paramsPromise;
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+    const { lang } = params;
     const config = locales[lang] || en;
     
     return {
@@ -18,12 +18,14 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
     };
 }
 
-export default async function Page(props: {
-  params: Promise<{ lang: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+export default async function Page({ 
+  params,
+  searchParams
+}: { 
+  params: { lang: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { lang } = await props.params;
-  const searchParams = await props.searchParams;
+  const { lang } = params;
 
   const config = locales[lang];
 
