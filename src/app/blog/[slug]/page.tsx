@@ -8,8 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { format } from 'date-fns';
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function Page({ params: { slug } }: { params: { slug: string } }) {
   const post = await getPostBySlug(slug);
 
   if (!post) {
