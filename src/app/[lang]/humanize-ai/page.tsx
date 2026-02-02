@@ -8,11 +8,13 @@ import type { Metadata } from 'next';
 
 const locales: Record<string, any> = { ar, en, es };
 
-export async function generateMetadata({ 
-    params 
-}: { 
-    params: { lang: string; }; 
-}): Promise<Metadata> {
+type Props = { 
+  params: Promise<{ lang: string }>; 
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> { 
+    const params = await props.params;
     const lang = params.lang;
     const config = locales[lang] || en;
     
@@ -22,25 +24,23 @@ export async function generateMetadata({
     };
 }
 
-export default function Page({ 
-    params 
-}: { 
-    params: { lang: string };
-}) {
+export default async function Page(props: Props) { 
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const lang = params.lang;
   
   const config = locales[lang];
 
-  if (!config) {
-    notFound();
+  if (!config) { 
+    notFound(); 
   }
 
   const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
-  return (
-    <>
+  return ( 
+    <> 
       <SidebarClient lang={lang} dir={dir} config={config} />
-       <Script
+      <Script
         id="reader-revenue-manager-script"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -65,6 +65,6 @@ export default function Page({
   );
 }
 
-export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'ar' }, { lang: 'es' }];
+export async function generateStaticParams() { 
+  return [{ lang: 'en' }, { lang: 'ar' }, { lang: 'es' }]; 
 }
