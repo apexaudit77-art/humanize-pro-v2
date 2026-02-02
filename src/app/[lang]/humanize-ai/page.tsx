@@ -9,12 +9,11 @@ import type { Metadata } from 'next';
 const locales: Record<string, any> = { ar, en, es };
 
 type Props = { 
-  params: Promise<{ lang: string }>; 
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { lang: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> { 
-    const params = await props.params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> { 
     const lang = params.lang;
     const config = locales[lang] || en;
     
@@ -24,9 +23,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
 }
 
-export default async function Page(props: Props) { 
-  const params = await props.params;
-  const searchParams = await props.searchParams;
+export default function Page({ params }: Props) { 
   const lang = params.lang;
   
   const config = locales[lang];

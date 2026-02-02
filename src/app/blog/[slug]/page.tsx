@@ -8,11 +8,11 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 
 type Props = {
-    params: Promise<{ slug: string }>;
+    params: { slug: string };
 };
 
-export default async function Page(props: Props) {
-  const { slug } = await props.params;
+export default async function Page({ params }: Props) {
+  const { slug } = params;
   const post = await getPostBySlug(slug);
 
   if (!post) {

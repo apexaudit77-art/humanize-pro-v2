@@ -46,7 +46,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${items
       .map((item) => {
-        const lastModString = (item.lastModified ?? new Date()).toISOString();
+        const lastModString = new Date(item.lastModified ?? new Date()).toISOString();
         return `
     <url>
         <loc>${item.url}</loc>
