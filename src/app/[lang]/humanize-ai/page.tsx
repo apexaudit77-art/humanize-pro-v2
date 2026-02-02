@@ -8,8 +8,8 @@ import type { Metadata } from 'next';
 
 const locales: Record<string, any> = { ar, en, es };
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-    const lang = params.lang;
+export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+    const { lang } = await paramsPromise;
     const config = locales[lang] || en;
     
     return {
