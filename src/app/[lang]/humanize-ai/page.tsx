@@ -9,10 +9,9 @@ const locales: Record<string, any> = { ar, en, es };
 
 interface PageProps {
   params: { lang: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
   const config = locales[lang] || en;
   return {
@@ -21,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function Page({ params, searchParams }: PageProps) {
+export default function Page({ params }: PageProps) {
   const { lang } = params;
   const config = locales[lang];
 
