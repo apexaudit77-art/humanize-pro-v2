@@ -8,19 +8,21 @@ import type { Metadata } from 'next';
 
 const locales: Record<string, any> = { ar, en, es };
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang;
-  const config = locales[lang] || en;
-  return {
-    title: config.metadata?.title || 'Humanize AI Tools',
-    description: config.metadata?.description || 'A suite of AI tools to humanize text.',
-  };
-}
-
-export default function Page({ params }: {
+type PageProps = {
   params: { lang: string };
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const lang = params.lang;
+    const config = locales[lang] || en;
+    return {
+        title: config.metadata?.title || 'Humanize AI Tools',
+        description: config.metadata?.description || 'A suite of AI tools to humanize text.',
+    };
+}
+
+export default function Page({ params }: PageProps) {
   const lang = params.lang;
   const config = locales[lang];
 
@@ -33,11 +35,11 @@ export default function Page({ params }: {
   return (
     <>
       <SidebarClient lang={lang} dir={dir} config={config} />
-      <Script
-        id="reader-revenue-manager-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+       <Script
+         id="reader-revenue-manager-script"
+         strategy="afterInteractive"
+         dangerouslySetInnerHTML={{
+            __html: `
             (self.SWG_BASIC = self.SWG_BASIC || []).push(basicSubscriptions => {
                 basicSubscriptions.init({
                   type: "NewsArticle",
@@ -45,15 +47,13 @@ export default function Page({ params }: {
                   isPartOfType: ["Product"],
                   isPartOfProductId: "CAowqaUKEwiS04n3p5WGAxXZ37QBHQoMDqg:openaccess",
                   autoPromptType: "contribution",
-                  clientOptions: {
-                    lang: "${lang}",
-                  },
+                  clientOptions: { lang: "${lang}" },
                 });
               });
             `,
-        }}
-      />
-      <Script src="https://news.google.com/swg/js/v1/swg-basic.js" strategy="afterInteractive" async />
+         }}
+       />
+       <Script src="https://news.google.com/swg/js/v1/swg-basic.js" strategy="afterInteractive" async />
     </>
   );
 }
