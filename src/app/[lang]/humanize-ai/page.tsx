@@ -7,13 +7,13 @@ import Script from 'next/script';
 import type { Metadata } from 'next';
 const locales: Record<string, any> = { ar, en, es };
 
-type PageProps = {
+interface PageProps {
   params: { lang: string };
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const lang = params.lang;
+  const { lang } = params;
   const config = locales[lang] || en;
   return {
     title: config.metadata?.title || 'Humanize AI Tools',
@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function Page({ params }: PageProps) {
-  const lang = params.lang;
+export default function Page({ params, searchParams }: PageProps) {
+  const { lang } = params;
   const config = locales[lang];
 
   if (!config) {
