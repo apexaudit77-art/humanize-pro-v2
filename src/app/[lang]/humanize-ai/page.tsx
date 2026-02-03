@@ -9,7 +9,7 @@ import type { Metadata } from 'next';
 const locales: Record<string, any> = { ar, en, es };
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const { lang } = params;
+  const lang = params.lang;
   const config = locales[lang] || en;
   return {
     title: config.metadata?.title || 'Humanize AI Tools',
@@ -21,7 +21,7 @@ export default function Page({ params }: {
   params: { lang: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { lang } = params;
+  const lang = params.lang;
   const config = locales[lang];
 
   if (!config) {
