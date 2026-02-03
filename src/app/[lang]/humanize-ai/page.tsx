@@ -5,11 +5,8 @@ import es from '@/lib/i18n/es.json';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import type { Metadata } from 'next';
-const locales: Record<string, any> = { ar, en, es };
 
-interface PageProps {
-  params: { lang: string };
-}
+const locales: Record<string, any> = { ar, en, es };
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
@@ -20,7 +17,10 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page({ params }: {
+  params: { lang: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const { lang } = params;
   const config = locales[lang];
 
